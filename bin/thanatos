@@ -3,6 +3,8 @@
 
 import argparse
 
+import thanatos
+
 def main():
     parser = argparse.ArgumentParser(
         description=(
@@ -12,10 +14,20 @@ def main():
         ),
     )
     
-    parser.add_argument('list-required-tables',
+    parser.add_argument('-l', '--list_tables', action='store_true',
     help='Lists all the SDE tables required by Thanatos.')
     
+    parser.add_argument('-d', '--download_tables', action='store_true',
+    help='Downloads all tables required by Thanatos.')
+    
     args = parser.parse_args()
+    
+    if args.list_tables:
+        thanatos.utils.get_list_of_required_tables()
+    
+    if args.download_tables:
+        required_tables = thanatos.utils.get_list_of_required_tables()
+        thanatos.utils.download_tables(required_tables)
 
 if __name__ == "__main__":
     main()

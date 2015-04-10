@@ -2,7 +2,9 @@
 
 from thanatos.questions import Question
 
-_root_path_to_fuzzysteve = 'https://www.fuzzwork.co.uk/dump/latest/'
+# Base URL for where to download SQL tables from
+# Using Fuzztsteve's site for now
+_base_url = 'https://www.fuzzwork.co.uk/dump/latest/'
 
 
 def get_list_of_required_tables():
@@ -28,11 +30,17 @@ def check_if_required_tables_exist():
     """
 
 
-def download_tables(tables_list):
-    """ Downloads a given list of tables from FuzzySteve's web site.
+def download_tables(tables_list, base_url=_base_url):
+    """ Downloads a given list of tables from a given web site.
 
     :param tables_list: A list of strings, each a table name to download.
     :type tables_list: list
 
     :return:
     """
+    
+    formating_string = base_url + '{}' + '.sql.bz2'
+    
+    list_of_urls = [formating_string.format(x) for x in tables_list]
+    
+    print list_of_urls
