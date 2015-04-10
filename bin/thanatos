@@ -1,0 +1,21 @@
+""" Command line access for thanatos """
+
+
+import argparse
+
+def main():
+    parser = argparse.ArgumentParser(
+        description=(
+            """A command line interface for the Thanatos library. This can """
+            """be used to populate a database with the required EVE Online """
+            """static data or for generating random EVE trivia questions."""
+        ),
+    )
+    
+    parser.add_argument('list-required-tables',
+    help='Lists all the SDE tables required by Thanatos.')
+    
+    args = parser.parse_args()
+
+if __name__ == "__main__":
+    main()
