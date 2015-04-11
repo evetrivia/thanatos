@@ -1,10 +1,18 @@
 
 
+import urllib
+import logging
+
 from thanatos.questions import Question
+
+_log = logging.getLogger('thanatos.utils')
 
 # Base URL for where to download SQL tables from
 # Using Fuzztsteve's site for now
 _base_url = 'https://www.fuzzwork.co.uk/dump/latest/'
+
+# File extension to be used in the download, save, and loading
+_table_file_extension = '.sql.bz2'
 
 
 def get_list_of_required_tables():
@@ -39,8 +47,16 @@ def download_tables(tables_list, base_url=_base_url):
     :return:
     """
     
-    formating_string = base_url + '{}' + '.sql.bz2'
+    _log.info('Downloading all required tables.')
     
-    list_of_urls = [formating_string.format(x) for x in tables_list]
+    formating_string = base_url + '{}' + _table_file_extension
+    list_of_urls     = [formating_string.format(x) for x in tables_list]
     
-    print list_of_urls
+    for table in tables_list:
+        full_url = formating_string.format(table)
+        
+        _log.info('Downloading {}'.format(full_url))
+        
+        urllib.urlretrieve(full_url, table + _table_file_extension)
+    
+    _log.info('Finished downloading all required tables.')

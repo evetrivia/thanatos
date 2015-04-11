@@ -2,6 +2,7 @@
 
 import logging
 
+from thanatos import database
 from thanatos import questions
 from thanatos import utils
 
