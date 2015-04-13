@@ -20,6 +20,14 @@ class DB(object):
             self._set_default_connection_details()
 
     def execute(self, sql):
+        """
+        :param sql: SQL statement to be executed
+        :type sql: str
+
+        :return: Lit of results
+        :rtype: list
+        """
+
         cursor = self.connection.cursor()
 
         cursor.execute(sql)
@@ -38,6 +46,60 @@ class DB(object):
             self._connect()
 
         return self._connection
+
+    def get_all_not_wh_regions(self):
+        """ Gets a list of all regions that are not WH regions.
+
+        :return: A list of all regions not including wormhole regions. Results have regionID and regionName.
+        :rtype: list
+        """
+
+        sql = '''
+            SELECT mapRegions.regionID, mapRegions.regionName
+              FROM mapRegions
+             WHERE mapRegions.regionID < 11000000
+        '''
+
+        return self.execute(sql)
+
+    def get_all_regions_connected_to_region(self, region_id):
+        """ Gets a list of all regions connected to the region ID passed in.
+
+        :param region_id: Region ID to find all regions connected to.
+        :type region_id: int
+
+        :return: A list of all regions connected to the specified region ID. Results have regionID and regionName.
+        :rtype: list
+        """
+
+        sql = '''
+            SELECT mapRegionJumps.toRegionID AS regionID, mapRegions.regionName
+              FROM mapRegionJumps
+              LEFT JOIN mapRegions ON mapRegions.regionID = mapRegionJumps.toRegionID
+             WHERE mapRegionJumps.fromRegionID = {}
+        '''.format(region_id)
+
+        return self.execute(sql)
+
+    def get_all_published_ships_basic(self):
+        """ Gets a list of all published ships and their basic information.
+
+        :return: Each result has typeID, typeName, groupID, groupName, categoryID, and categoryName.
+        :rtype: list
+        """
+
+        sql = '''
+            SELECT invTypes.typeID, invTypes.typeName,
+                   invGroups.groupID, invGroups.groupName,
+                   invCategories.categoryID, invCategories.categoryName
+              FROM invTypes
+             INNER JOIN invGroups ON invTypes.groupID = invGroups.groupID
+             INNER JOIN invCategories ON invGroups.categoryID = invCategories.categoryID
+             WHERE invCategories.categoryID = 6
+               AND invTypes.published = 1
+        '''
+
+        return self.execute(sql)
 
     def _connect(self):
         """ Creates a connection to the MySQL DB. """

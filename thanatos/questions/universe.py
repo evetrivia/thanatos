@@ -26,25 +26,12 @@ class BorderingRegionsQuestion(Question):
 
     def ask(self):
         # Lets start by getting a region to base this all on and call it the source region
-        # Lets ignore WH regions though, 11000000 and up
-        sql = """
-            SELECT mapRegions.regionID, mapRegions.regionName
-              FROM mapRegions
-             WHERE mapRegions.regionID < 11000000
-        """
-
-        all_regions   = self.db.execute(sql)
+        # Lets ignore WH regions though
+        all_regions   = self.db.get_all_not_wh_regions()
         source_region = choice(all_regions)
 
         # Next lets find a random region that is connected to the source region, this will be the answer
-        sql = """
-            SELECT mapRegionJumps.toRegionID, mapRegions.regionName
-              FROM mapRegionJumps
-              LEFT JOIN mapRegions ON mapRegions.regionID = mapRegionJumps.toRegionID
-             WHERE mapRegionJumps.fromRegionID = {}
-        """.format(source_region[0])
-
-        connected_regions = self.db.execute(sql)
+        connected_regions = self.db.get_all_regions_connected_to_region(source_region[0])
         correct_answer    = choice(connected_regions)
 
         # Now we need to find the other wrong answers
