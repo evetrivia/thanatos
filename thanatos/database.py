@@ -19,6 +19,13 @@ class DB(object):
         if None in (self.host, self.user, self.password, self.database):
             self._set_default_connection_details()
 
+    def execute(self, sql):
+        cursor = self.connection.cursor()
+
+        cursor.execute(sql)
+
+        return cursor.fetchall()
+
     @property
     def connection(self):
         """ Checks if the connection object exists yet, if not creates it and returns it.

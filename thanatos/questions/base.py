@@ -2,7 +2,8 @@
 
 import logging
 
-from abc import ABCMeta, abstractmethod
+from abc    import ABCMeta, abstractmethod
+from random import shuffle
 
 _log = logging.getLogger('thanatos.questions.base')
 
@@ -42,3 +43,28 @@ class Question(object):
         """
 
         pass
+
+    def format_question(self, correct_answer, wrong_answers, question):
+        choices = [x for x in wrong_answers]
+        choices.append(correct_answer)
+        shuffle(choices)
+
+        question = {
+            'answer'   : correct_answer[0],
+            'question' : question,
+            'choices'  : self.convert_choices_to_dict(choices)
+        }
+
+        return question
+
+    @staticmethod
+    def convert_choices_to_dict(choices):
+        formatted_choices = []
+
+        for x in choices:
+            formatted_choices.append({
+                'value' : x[0],
+                'text'  : x[1],
+            })
+
+        return formatted_choices
