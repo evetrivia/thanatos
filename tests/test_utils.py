@@ -11,7 +11,7 @@ class UtilsTestCase(unittest2.TestCase):
     def setUp(self):
         pass
 
-    @mock.patch('thanatos.questions.Question.__subclasses__')
+    @mock.patch('thanatos.questions.base.Question.__subclasses__')
     def test_required_tables_returns_unique_set(self, mock_subclasses):
         """  """
         mock_subclass_1 = mock.Mock()
