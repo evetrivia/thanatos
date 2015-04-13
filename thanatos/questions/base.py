@@ -4,7 +4,7 @@ import logging
 
 from abc import ABCMeta, abstractmethod
 
-_log = logging.getLogger('thanatos.questions')
+_log = logging.getLogger('thanatos.questions.base')
 
 
 class Question(object):
@@ -14,8 +14,12 @@ class Question(object):
 
     required_tables = None
 
-    def __init__(self):
-        question = None
+    category_primary   = None
+    category_secondary = None
+
+    random_weight = 0
+
+    question = None
 
     @abstractmethod
     def ask(self):
@@ -38,17 +42,3 @@ class Question(object):
         """
 
         pass
-
-
-class BorderingRegionsQuestion(Question):
-    """ Asks what region boards another given region. """
-
-    required_tables = [
-        'mapRegions',
-        'mapRegionJumps',
-    ]
-
-    def __init__(self):
-        question = 'Which of the following regions borders the {} region?'
-
-        super(Question, self).__init__()

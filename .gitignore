@@ -1,9 +1,13 @@
 # Python
 venv/
 *.pyc
+*.egg-info/
 
 # PyCharm
 .idea/
 
 # Vagrant
 .vagrant/
+
+# Thanatos
+*.sql.bz2

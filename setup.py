@@ -27,5 +27,5 @@ setup(
     packages=find_packages(),
     data_files=[('', ['README.md', 'LICENSE'])],
     install_requires=reqs,
-    scripts=['bin/thanatos.py'],
+    scripts=['bin/thanatos'],
 )

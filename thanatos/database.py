@@ -2,28 +2,49 @@
 
 import os
 import MySQLdb
+import logging
 
-
-def load_table(table_name):
-    """ Given a table name it loads the file from disk and executes on the DB.
-    
-    :param table_name:
-    :type table_name:
-    
-    """
+_log = logging.getLogger('thanatos.database')
     
 
 class DB(object):
-    def __init__(self, connection_string=None):
-        self.conn = None
-        self.connection_string = connection_string
+    def __init__(self, host=None, user=None, password=None, database=None):
+        self._connection = None
 
-        if self.connection_string is None:
-            self.connection_string = self._get_default_connection_string()
+        self.host     = host
+        self.user     = user
+        self.password = password
+        self.database = database
 
-    def connect(self):
-        self.conn = MySQLdb.connect(self.host, self.user, self.password, self.sqldb)
+        if None in (self.host, self.user, self.password, self.database):
+            self._set_default_connection_details()
 
-    @staticmethod
-    def _get_default_connection_string():
-        return ''
+    @property
+    def connection(self):
+        """ Checks if the connection object exists yet, if not creates it and returns it.
+
+        :return: A MySQLdb connection
+        :rtype: MySQLdb.connections.Connection
+        """
+
+        if self._connection is None:
+            self._connect()
+
+        return self._connection
+
+    def _connect(self):
+        """ Creates a connection to the MySQL DB. """
+
+        self._connection = MySQLdb.connect(self.host, self.user, self.password, self.database)
+
+    def _set_default_connection_details(self):
+        """ Sets the connection details based on environment vars or Thanatos default settings. """
+
+        if os.environ.get('C9_PROJECT') is not None:
+            pass
+
+        else:
+            self.host     = '127.0.0.1'
+            self.user     = 'vagrant'
+            self.password = 'vagrant'
+            self.database = 'thanatos'

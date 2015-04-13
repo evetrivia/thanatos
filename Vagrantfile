@@ -20,7 +20,7 @@ Vagrant.configure('2') do |config|
     mysql -uroot -pMySuperPassword -e "DROP USER vagrant@'%'"
 
     mysql -uroot -pMySuperPassword -e "CREATE USER vagrant@'%' IDENTIFIED BY 'vagrant'"
-    mysql -uroot -pMySuperPassword -e "GRANT ALL PRIVILEGES ON evecomments.* TO vagrant@'%' WITH GRANT OPTION"
+    mysql -uroot -pMySuperPassword -e "GRANT ALL PRIVILEGES ON thanatos.* TO vagrant@'%' WITH GRANT OPTION"
   SCRIPT
 
   config.vm.provision :shell, :inline => script
