@@ -8,6 +8,14 @@ _log = logging.getLogger('thanatos.database')
     
 
 class DB(object):
+    required_tables = [
+        'invTypes',
+        'invGroups',
+        'invCategories',
+        'mapRegions',
+        'mapRegionJumps',
+    ]
+
     def __init__(self, host=None, user=None, password=None, database=None):
         self._connection = None
 

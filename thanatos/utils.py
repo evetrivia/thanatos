@@ -47,10 +47,7 @@ def get_list_of_required_tables():
     :rtype: set
     """
 
-    required_tables = set()
-
-    for subclass in Question.__subclasses__():
-        required_tables.update(subclass.required_tables)
+    required_tables = DB.required_tables
 
     return required_tables
 

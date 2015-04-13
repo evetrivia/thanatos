@@ -9,11 +9,6 @@ from thanatos.questions.base import Question
 class BorderingRegionsQuestion(Question):
     """ Asks what region boards another given region. """
 
-    required_tables = [
-        'mapRegions',
-        'mapRegionJumps',
-    ]
-
     category_primary   = 'Geography'
     category_secondary = 'Regions'
 
