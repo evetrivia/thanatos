@@ -40,7 +40,7 @@ class DB(object):
 
         cursor.execute(sql)
 
-        return cursor.fetchall()
+        return [x for x in cursor.fetchall()]
 
     @property
     def connection(self):
