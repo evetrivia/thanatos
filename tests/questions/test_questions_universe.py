@@ -17,6 +17,23 @@ class BorderingRegionsTestCase(unittest2.TestCase):
 
         universe.BorderingRegionsQuestion(self.mock_db)
 
+
+class PoitotTestCase(unittest2.TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_class_initializes(self):
+        """ Simply test we can create an instance of the Poitot questions class. """
+
+        universe.PoitotFamousForQuestion()
+
+
+class UniverseUtilsTestCase(unittest2.TestCase):
+
+    def setUp(self):
+        self.mock_db = mock.Mock(spec=DB)
+
     def test_removal_of_regions(self):
         """ Specifically tests to make sure we remove the jove regions with no gates. """
 
@@ -42,14 +59,3 @@ class BorderingRegionsTestCase(unittest2.TestCase):
         gateless_regions = universe.remove_regions_with_no_gates(sample_regions_list)
 
         self.assertEqual(gateless_regions, [(10000001L, 'Derelik')])
-
-
-class PoitotTestCase(unittest2.TestCase):
-
-    def setUp(self):
-        pass
-
-    def test_class_initializes(self):
-        """ Simply test we can create an instance of the Poitot questions class. """
-
-        universe.PoitotFamousForQuestion()

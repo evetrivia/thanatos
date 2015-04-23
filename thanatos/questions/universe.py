@@ -1,31 +1,12 @@
 
 
+import logging
+
 from random import choice, sample
 
 from thanatos.questions.base import Question
 
-
-def remove_regions_with_no_gates(regions):
-    """ Removes all Jove regions from a list of regions.
-
-    :param regions: A list of tuples (regionID, regionName)
-    :type regions: list
-
-    :return: A list of regions minus those in jove space
-    :rtype: list
-    """
-
-    list_of_gateless_regions = [
-        (10000004, 'UUA-F4'),
-        (10000017, 'J7HZ-F'),
-        (10000019, 'A821-A'),
-    ]
-
-    for gateless_region in list_of_gateless_regions:
-        if gateless_region in regions:
-            regions.remove(gateless_region)
-
-    return regions
+_log = logging.getLogger('thanatos.questions.base')
 
 
 class BorderingRegionsQuestion(Question):
@@ -65,10 +46,7 @@ class BorderingRegionsQuestion(Question):
 
         possible_wrong_answers = list(set(all_regions) - set(regions_to_exclude))
 
-        # Finally lets randomly select some wrong answers
-        wrong_answers = sample(possible_wrong_answers, 2)
-
-        question = self.format_question(correct_answer, wrong_answers, self.question.format(source_region[1]))
+        question = self.format_question(correct_answer, possible_wrong_answers, self.question.format(source_region[1]))
 
         return question
 
@@ -84,13 +62,38 @@ class PoitotFamousForQuestion(Question):
     question = 'Poitot is famous for being...?'
 
     def ask(self):
-        correct_answer   = (0, 'The only named system in Syndicate.')
-        wrong_answers = [
+        correct_answer = (0, 'The only named system in Syndicate.')
+        
+        # It would be great to add more here over time.
+        possible_wrong_answers = [
             (1, 'Kind to animals.'),
             (2, 'A fictional space detective.'),
             (3, 'Adjacent to F67E-Q.'),
         ]
 
-        question = self.format_question(correct_answer, wrong_answers, self.question)
+        question = self.format_question(correct_answer, possible_wrong_answers, self.question)
 
         return question
+
+
+def remove_regions_with_no_gates(regions):
+    """ Removes all Jove regions from a list of regions.
+
+    :param regions: A list of tuples (regionID, regionName)
+    :type regions: list
+
+    :return: A list of regions minus those in jove space
+    :rtype: list
+    """
+
+    list_of_gateless_regions = [
+        (10000004, 'UUA-F4'),
+        (10000017, 'J7HZ-F'),
+        (10000019, 'A821-A'),
+    ]
+
+    for gateless_region in list_of_gateless_regions:
+        if gateless_region in regions:
+            regions.remove(gateless_region)
+
+    return regions
