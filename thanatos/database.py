@@ -37,6 +37,7 @@ class DB(object):
         """
 
         cursor = self.connection.cursor()
+        print len(sql)
 
         cursor.execute(sql)
 
@@ -92,7 +93,7 @@ class DB(object):
     def get_all_published_ships_basic(self):
         """ Gets a list of all published ships and their basic information.
 
-        :return: Each result has typeID, typeName, groupID, groupName, categoryID, and categoryName.
+        :return: Each result has a tuple of (typeID, typeName, groupID, groupName, categoryID, and categoryName).
         :rtype: list
         """
 

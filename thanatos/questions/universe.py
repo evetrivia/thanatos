@@ -6,7 +6,7 @@ from random import choice, sample
 
 from thanatos.questions.base import Question
 
-_log = logging.getLogger('thanatos.questions.base')
+_log = logging.getLogger('thanatos.questions.universe')
 
 
 class BorderingRegionsQuestion(Question):

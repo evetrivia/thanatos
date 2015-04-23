@@ -11,3 +11,4 @@ venv/
 
 # Thanatos
 *.sql.bz2
+*.sql

@@ -63,15 +63,14 @@ def check_if_required_tables_exist():
 def load_table_from_file(tables):
     """ Loads a give set of tables from disk and populates the DB with them. """
 
-    db     = DB()
-    cursor = db.connection.cursor()
+    db = DB()
 
     for table in tables:
         table_name = get_table_filename(table)
 
         with bz2.BZ2File(table_name, 'r') as sql_file:
             for sql_statement in sql_file.read().split(';'):
-                cursor.execute(sql_statement)
+                db.execute(sql_statement)
 
 
 def download_tables(tables_list, base_url=_base_url):
