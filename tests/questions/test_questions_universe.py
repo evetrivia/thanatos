@@ -17,6 +17,18 @@ class BorderingRegionsTestCase(unittest2.TestCase):
 
         universe.BorderingRegionsQuestion(self.mock_db)
 
+    # def test_question_ask(self):
+    #
+    #     self.mock_db.get_all_not_wh_regions.return_value = [
+    #         (10000001L, 'Derelik'),
+    #     ]
+    #
+    #     self.mock_db.get_all_regions_connected_to_region.return_value = [
+    #
+    #     ]
+    #
+    #     brq = universe.BorderingRegionsQuestion(self.mock_db)
+    #     brq.ask()
 
 class PoitotTestCase(unittest2.TestCase):
 

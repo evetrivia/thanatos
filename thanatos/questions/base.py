@@ -1,9 +1,9 @@
 
 
+import random
 import logging
 
 from abc    import ABCMeta, abstractmethod
-from random import shuffle
 
 _log = logging.getLogger('thanatos.questions.base')
 
@@ -30,7 +30,7 @@ class Question(object):
 
         {
             'answer'   : 000,
-            'question' : 'What region borders {}?,
+            'question' : 'What region borders {}?',
             'choices'  : [
                 (000, 'Region 000'),
                 (001, 'Region 001'),
@@ -63,12 +63,12 @@ class Question(object):
         """
         
         # Lets randomly select some wrong answers
-        wrong_answers = sample(possible_wrong_answers, 2)
+        wrong_answers = random.sample(possible_wrong_answers, 2)
         
         # Combine the selected wrong answers with the actual answer and shuffle
         choices = [x for x in wrong_answers]
         choices.append(correct_answer)
-        shuffle(choices)
+        random.shuffle(choices)
 
         # Format it all in a nice dict
         question = {
@@ -86,11 +86,12 @@ class Question(object):
         of question choices to be returned by self.ask()
         
         :param convert_choices_to_dict:
-        :type convert_choices_to_dict:
+        :type convert_choices_to_dict: list
         
         :return: 
         :rtype:
         """
+
         formatted_choices = []
 
         for x in choices:
@@ -100,3 +101,10 @@ class Question(object):
             })
 
         return formatted_choices
+
+
+class TestableBaseQuestion(Question):
+    """ A subclass of the base class to test against. """
+
+    def ask(self):
+        pass
