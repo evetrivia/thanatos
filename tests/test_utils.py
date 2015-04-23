@@ -23,3 +23,9 @@ class UtilsTestCase(unittest2.TestCase):
 
         mock_urlretrieve.assert_any_call('http://example.com/table_one.sql.bz2', 'table_one.sql.bz2')
         mock_urlretrieve.assert_any_call('http://example.com/table_two.sql.bz2', 'table_two.sql.bz2')
+
+    def test_get_table_filename(self):
+        table_name = 'test_one'
+        table_file_name = utils.get_table_filename(table_name)
+
+        self.assertEqual(table_file_name, 'test_one.sql.bz2')
