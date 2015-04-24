@@ -37,7 +37,6 @@ class DB(object):
         """
 
         cursor = self.connection.cursor()
-        print len(sql)
 
         cursor.execute(sql)
 

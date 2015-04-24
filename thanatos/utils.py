@@ -69,8 +69,8 @@ def load_table_from_file(tables):
         table_name = get_table_filename(table)
 
         with bz2.BZ2File(table_name, 'r') as sql_file:
-            for sql_statement in sql_file.read().split(';'):
-                db.execute(sql_statement)
+            sql = sql_file.read()
+            db.execute(sql)
 
 
 def download_tables(tables_list, base_url=_base_url):
