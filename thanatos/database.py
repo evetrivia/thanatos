@@ -9,6 +9,7 @@ _log = logging.getLogger('thanatos.database')
 
 class DB(object):
     required_tables = [
+        'dgmTypeAttributes',
         'invTypes',
         'invGroups',
         'invCategories',
@@ -108,6 +109,28 @@ class DB(object):
         '''
 
         return self.execute(sql)
+
+    def get_dogma_attribute_for_type(self, type_id, dogma_attribute):
+        """
+
+        :param type_id:
+        :param dogma_attribute:
+
+        :return:
+        :rtype:
+        """
+
+        sql = '''
+            SELECT COALESCE(dgmTypeAttributes.valueInt, dgmTypeAttributes.valueFloat)
+              FROM invTypes
+              LEFT JOIN dgmTypeAttributes ON invTypes.typeID = dgmTypeAttributes.typeID
+             WHERE invTypes.typeID = {}
+               AND dgmTypeAttributes.attributeID = {}
+        '''.format(type_id, dogma_attribute)
+
+        result = self.execute(sql)
+
+        return result[0][0]  # self.execute always returns a list of tuples
 
     def _connect(self):
         """ Creates a connection to the MySQL DB. """
