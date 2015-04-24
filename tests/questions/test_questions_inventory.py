@@ -17,10 +17,15 @@ class HighSlotsQuestionTestCase(unittest2.TestCase):
 
         inventory.HighSlotsQuestion(self.mock_db)
 
-    def test_high_slots_returns_proper_question(self):
-        self.mock_db.get_all_published_ships_basic.return_value = []
+    @mock.patch('thanatos.questions.base.Question.format_question')
+    def test_question_ask(self, mock_format_question):
+        self.mock_db.get_all_published_ships_basic.return_value = [(582L, 'Bantam', 25L, 'Frigate', 6L, 'Ship')]
+        self.mock_db.get_dogma_attribute_for_type.return_value = 3
 
-        hsq = inventory.HighSlotsQuestion(self.mock_db)
-        question = hsq.ask()
+        inventory.HighSlotsQuestion(self.mock_db).ask()
 
-        self.assertEqual(question, None)
+        mock_format_question.assert_called_with(
+            (3, 3),
+            [(0, 0), (1, 1), (2, 2), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8)],
+            'How many high slots does the Bantam have?',
+        )
