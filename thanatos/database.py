@@ -26,6 +26,7 @@ class DB(object):
         self.database = database
 
         if None in (self.host, self.user, self.password, self.database):
+            _log.info('One of host, user, password, or database was not set')
             self._set_default_connection_details()
 
     def execute(self, sql):
@@ -140,11 +141,21 @@ class DB(object):
     def _set_default_connection_details(self):
         """ Sets the connection details based on environment vars or Thanatos default settings. """
 
+        _log.info('Setting default datbase connetion details.')
+
         if os.environ.get('C9_PROJECT') is not None:
-            pass
+            _log.info('C9_PROJECT environment found. Setting C9 DB connection details.')
+            
+            # See https://docs.c9.io/v1.0/docs/setting-up-mysql
+            self.host = os.environ.get('IP')
+            self.user = os.environ.get('C9_USER')
+            self.password = ''
+            self.database = 'c9'
 
         else:
-            self.host     = '127.0.0.1'
-            self.user     = 'vagrant'
+            _log.info('Using Vagrant DB default connection details.')
+            
+            self.host = '127.0.0.1'
+            self.user = 'vagrant'
             self.password = 'vagrant'
             self.database = 'thanatos'

@@ -19,7 +19,7 @@ class HighSlotsQuestion(Question):
 
     question = 'How many high slots does the {} have?'
 
-    high_slots_dogma_attribute = 12
+    high_slots_dogma_attribute = 14
 
     slots_min = 0
     slots_max = 9  # 1 more than the max of 8 do to how range works
