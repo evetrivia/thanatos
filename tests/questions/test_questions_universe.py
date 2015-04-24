@@ -17,18 +17,44 @@ class BorderingRegionsTestCase(unittest2.TestCase):
 
         universe.BorderingRegionsQuestion(self.mock_db)
 
-    # def test_question_ask(self):
-    #
-    #     self.mock_db.get_all_not_wh_regions.return_value = [
-    #         (10000001L, 'Derelik'),
-    #     ]
-    #
-    #     self.mock_db.get_all_regions_connected_to_region.return_value = [
-    #
-    #     ]
-    #
-    #     brq = universe.BorderingRegionsQuestion(self.mock_db)
-    #     brq.ask()
+    @mock.patch('thanatos.questions.base.Question.format_question')
+    @mock.patch('random.choice')
+    def test_question_ask(self, random_choice, mock_format_question):
+        all_regions = [
+            (10000001L, 'Region One'),
+            (10000002L, 'Region Two'),
+            (10000003L, 'Region Three'),
+            (10000004L, 'Region Four'),
+            (10000005L, 'Region Five'),
+            (10000006L, 'Region Six'),
+        ]
+
+        self.mock_db.get_all_not_wh_regions.return_value = all_regions
+
+        random_choice.side_effect = [
+            (10000001L, 'Region One'),
+            (10000005L, 'Region Five'),
+        ]
+
+        self.mock_db.get_all_regions_connected_to_region.return_value = [
+            (10000005L, 'Region Five'),
+            (10000006L, 'Region Six'),
+        ]
+
+        universe.BorderingRegionsQuestion(self.mock_db).ask()
+
+        random_choice.assert_any_call(all_regions)
+        random_choice.assert_any_call([
+            (10000005L, 'Region Five'),
+            (10000006L, 'Region Six'),
+        ])
+
+        mock_format_question.assert_called_with(
+            (10000005L, 'Region Five'),
+            [(10000003L, 'Region Three'), (10000002L, 'Region Two'), (10000004L, 'Region Four')],
+            'Which of the following regions borders the Region One region?',
+        )
+
 
 class PoitotTestCase(unittest2.TestCase):
 
@@ -39,6 +65,16 @@ class PoitotTestCase(unittest2.TestCase):
         """ Simply test we can create an instance of the Poitot questions class. """
 
         universe.PoitotFamousForQuestion()
+
+    @mock.patch('thanatos.questions.base.Question.format_question')
+    def test_question_ask(self, mock_format_question):
+        universe.PoitotFamousForQuestion().ask()
+
+        mock_format_question.assert_called_with(
+            (0, 'The only named system in Syndicate.'),
+            [(1, 'Kind to animals.'), (2, 'A fictional space detective.'), (3, 'Adjacent to F67E-Q.')],
+            'Poitot is famous for being...?',
+        )
 
 
 class UniverseUtilsTestCase(unittest2.TestCase):

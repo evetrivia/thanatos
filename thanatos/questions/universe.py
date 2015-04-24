@@ -1,8 +1,7 @@
 
 
+import random
 import logging
-
-from random import choice, sample
 
 from thanatos.questions.base import Question
 
@@ -32,11 +31,11 @@ class BorderingRegionsQuestion(Question):
 
 
         # Now pick our random source region
-        source_region = choice(all_regions)
+        source_region = random.choice(all_regions)
 
         # Next lets find a random region that is connected to the source region, this will be the answer
         connected_regions = self.db.get_all_regions_connected_to_region(source_region[0])
-        correct_answer    = choice(connected_regions)
+        correct_answer    = random.choice(connected_regions)
 
         # Now we need to find the possible wrong answers
         # These regions need to not be connected to the source region
