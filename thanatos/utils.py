@@ -4,7 +4,6 @@ import bz2
 import urllib
 import logging
 
-from thanatos.database       import DB
 from thanatos.questions.base import Question
 
 _log = logging.getLogger('thanatos.utils')

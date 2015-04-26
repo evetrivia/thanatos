@@ -15,6 +15,7 @@ required_tables = [
     'mapRegionJumps',
 ]
 
+
 def get_all_not_wh_regions(db_connection):
     """ Gets a list of all regions that are not WH regions.
 
@@ -32,6 +33,7 @@ def get_all_not_wh_regions(db_connection):
     cursor.execute(sql)
 
     return cursor.fetchall()
+
 
 def get_all_regions_connected_to_region(db_connection, region_id):
     """ Gets a list of all regions connected to the region ID passed in.
@@ -54,6 +56,7 @@ def get_all_regions_connected_to_region(db_connection, region_id):
     cursor.execute(sql)
 
     return cursor.fetchall()
+
 
 def get_all_published_ships_basic(db_connection):
     """ Gets a list of all published ships and their basic information.
@@ -78,6 +81,7 @@ def get_all_published_ships_basic(db_connection):
 
     return cursor.fetchall()
 
+
 def get_dogma_attribute_for_type(db_connection, type_id, dogma_attribute):
     """
 
@@ -101,6 +105,7 @@ def get_dogma_attribute_for_type(db_connection, type_id, dogma_attribute):
 
     return cursor.fetchone()[0]
 
+
 def get_connection(connection_details=None):
     """ Creates a connection to the MySQL DB. """
     
@@ -113,6 +118,7 @@ def get_connection(connection_details=None):
         connection_details['password'],
         connection_details['database']
     )
+
 
 def get_default_connection_details():
     """ Gets the connection details based on environment vars or Thanatos default settings.

@@ -1,28 +1,31 @@
 
 
 import mock
+import MySQLdb
 import unittest2
 
-from thanatos.database  import DB
 from thanatos.questions import inventory
 
 
 class HighSlotsQuestionTestCase(unittest2.TestCase):
 
     def setUp(self):
-        self.mock_db = mock.Mock(spec=DB)
+        self.mock_db_connection = mock.Mock(spec=MySQLdb.connection)
 
     def test_class_initializes(self):
         """ Simply test we can create an instance of the class. """
 
-        inventory.HighSlotsQuestion(self.mock_db)
+        inventory.HighSlotsQuestion(self.mock_db_connection)
 
+    @mock.patch('thanatos.database')
     @mock.patch('thanatos.questions.base.Question.format_question')
-    def test_question_ask(self, mock_format_question):
-        self.mock_db.get_all_published_ships_basic.return_value = [(582L, 'Bantam', 25L, 'Frigate', 6L, 'Ship')]
-        self.mock_db.get_dogma_attribute_for_type.return_value = 3
+    def test_question_ask(self, mock_format_question, mock_db_methods):
+        """ Test we can call the high slots question ask method. """
 
-        inventory.HighSlotsQuestion(self.mock_db).ask()
+        mock_db_methods.get_all_published_ships_basic.return_value = [(582L, 'Bantam', 25L, 'Frigate', 6L, 'Ship')]
+        mock_db_methods.get_dogma_attribute_for_type.return_value = 3
+
+        inventory.HighSlotsQuestion(self.mock_db_connection).ask()
 
         mock_format_question.assert_called_with(
             (3, 3),

@@ -3,6 +3,8 @@
 import random
 import logging
 
+import thanatos.database
+
 from thanatos.questions.base import Question
 
 _log = logging.getLogger('thanatos.questions.universe')
@@ -18,13 +20,13 @@ class BorderingRegionsQuestion(Question):
 
     question = 'Which of the following regions borders the {} region?'
 
-    def __init__(self, database):
-        self.db = database
+    def __init__(self, database_connection):
+        self.db_connection = database_connection
 
     def ask(self):
         # Lets start by getting a region to base this all on and call it the source region
         # Lets ignore WH regions though
-        all_regions = self.db.get_all_not_wh_regions()
+        all_regions = thanatos.database.get_all_not_wh_regions(self.db_connection)
 
         # Before we pick our source region we need to remove the Jove regions of as they have no gates:
         all_regions = remove_regions_with_no_gates(all_regions)
@@ -34,7 +36,7 @@ class BorderingRegionsQuestion(Question):
         source_region = random.choice(all_regions)
 
         # Next lets find a random region that is connected to the source region, this will be the answer
-        connected_regions = self.db.get_all_regions_connected_to_region(source_region[0])
+        connected_regions = thanatos.database.get_all_regions_connected_to_region(self.db_connection, source_region[0])
         correct_answer    = random.choice(connected_regions)
 
         # Now we need to find the possible wrong answers

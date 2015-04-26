@@ -1,8 +1,9 @@
 
 
+import random
 import logging
 
-from random import choice, sample
+import thanatos.database
 
 from thanatos.questions.base import Question
 
@@ -24,15 +25,20 @@ class HighSlotsQuestion(Question):
     slots_min = 0
     slots_max = 9  # 1 more than the max of 8 do to how range works
 
-    def __init__(self, database):
-        self.db = database
+    def __init__(self, database_connection):
+        self.db_connection = database_connection
 
     def ask(self):
-        all_ships = self.db.get_all_published_ships_basic()
+        all_ships = thanatos.database.get_all_published_ships_basic(self.db_connection)
 
-        chosen_ship = choice(all_ships)
+        chosen_ship = random.choice(all_ships)
 
-        high_slots = int(self.db.get_dogma_attribute_for_type(chosen_ship[0], self.high_slots_dogma_attribute))
+        high_slots = int(thanatos.database.get_dogma_attribute_for_type(
+            self.db_connection,
+            chosen_ship[0],
+            self.high_slots_dogma_attribute)
+        )
+
         correct_answer = (high_slots, high_slots)
 
         possible_answers = range(self.slots_min, self.slots_max)

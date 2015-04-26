@@ -1,25 +1,28 @@
 
 
 import mock
+import MySQLdb
 import unittest2
 
-from thanatos.database  import DB
 from thanatos.questions import universe
 
 
 class BorderingRegionsTestCase(unittest2.TestCase):
 
     def setUp(self):
-        self.mock_db = mock.Mock(spec=DB)
+        self.mock_db_connection = mock.Mock(spec=MySQLdb.connection)
 
     def test_class_initializes(self):
         """ Simply test we can create an instance of the BRQ class. """
 
-        universe.BorderingRegionsQuestion(self.mock_db)
+        universe.BorderingRegionsQuestion(self.mock_db_connection)
 
+    @mock.patch('thanatos.database')
     @mock.patch('thanatos.questions.base.Question.format_question')
     @mock.patch('random.choice')
-    def test_question_ask(self, random_choice, mock_format_question):
+    def test_question_ask(self, random_choice, mock_format_question, mock_db_methods):
+        """ Test we can call the bordering region question ask method. """
+
         all_regions = [
             (10000001L, 'Region One'),
             (10000002L, 'Region Two'),
@@ -29,19 +32,19 @@ class BorderingRegionsTestCase(unittest2.TestCase):
             (10000006L, 'Region Six'),
         ]
 
-        self.mock_db.get_all_not_wh_regions.return_value = all_regions
+        mock_db_methods.get_all_not_wh_regions.return_value = all_regions
 
         random_choice.side_effect = [
             (10000001L, 'Region One'),
             (10000005L, 'Region Five'),
         ]
 
-        self.mock_db.get_all_regions_connected_to_region.return_value = [
+        mock_db_methods.get_all_regions_connected_to_region.return_value = [
             (10000005L, 'Region Five'),
             (10000006L, 'Region Six'),
         ]
 
-        universe.BorderingRegionsQuestion(self.mock_db).ask()
+        universe.BorderingRegionsQuestion(self.mock_db_connection).ask()
 
         random_choice.assert_any_call(all_regions)
         random_choice.assert_any_call([
@@ -68,6 +71,8 @@ class PoitotTestCase(unittest2.TestCase):
 
     @mock.patch('thanatos.questions.base.Question.format_question')
     def test_question_ask(self, mock_format_question):
+        """ Test we can call the poitot question ask method. """
+
         universe.PoitotFamousForQuestion().ask()
 
         mock_format_question.assert_called_with(
@@ -80,7 +85,7 @@ class PoitotTestCase(unittest2.TestCase):
 class UniverseUtilsTestCase(unittest2.TestCase):
 
     def setUp(self):
-        self.mock_db = mock.Mock(spec=DB)
+        pass
 
     def test_removal_of_regions(self):
         """ Specifically tests to make sure we remove the jove regions with no gates. """
