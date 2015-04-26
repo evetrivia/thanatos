@@ -21,6 +21,7 @@ deploy:
   on:
     tags: true
     repo: Regner/thanatos
+  distributions: "sdist bdist_wheel"
 
 notifications:
   webhooks:
