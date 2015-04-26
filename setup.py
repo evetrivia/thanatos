@@ -21,11 +21,20 @@ reqs         = [str(ir.req) for ir in install_reqs]
 setup(
     name="Thanatos",
     version=__version__,
-    description="A Python library for generating EVE trivia questions.",
+    description="A Python library for generating EVE Online trivia questions.",
     long_description=readme_contents,
     license="MIT License",
     packages=find_packages(),
     data_files=[('', ['README.md', 'LICENSE'])],
     install_requires=reqs,
     scripts=['bin/thanatos'],
+    classifiers=[
+        "Development Status :: 2 - Pre-Alpha",
+        "License :: OSI Approved :: MIT License",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2.7",
+        "Topic :: Games/Entertainment",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ],
 )
