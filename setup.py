@@ -28,7 +28,7 @@ setup(
     packages=find_packages(),
     author="Regner Blok-Andersen",
     author_email="regnerba@gmail.com",
-    url="hhttps://github.com/Regner/thanatos",
+    url="https://github.com/Regner/thanatos",
     data_files=[('', ['README.md', 'LICENSE'])],
     install_requires=reqs,
     scripts=['bin/thanatos'],
