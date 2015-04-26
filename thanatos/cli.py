@@ -37,11 +37,10 @@ def main():
         thanatos_log.addHandler(log_handler)
     
     if args.list_tables:
-        thanatos.utils.get_list_of_required_tables()
+        thanatos.database.required_tables
     
     if args.download_tables:
-        required_tables = thanatos.utils.get_list_of_required_tables()
-        thanatos.utils.download_tables(required_tables)
+        thanatos.utils.download_tables(thanatos.database.required_tables)
 
     if args.setup_tables:
         pass

@@ -1,10 +1,19 @@
 
 
 import os
+import bz2
+import urllib
 import MySQLdb
 import logging
 
 _log = logging.getLogger('thanatos.database')
+
+# Base URL for where to download SQL tables from
+# Using Fuzztsteve's site for now
+_base_url = 'https://www.fuzzwork.co.uk/dump/latest/'
+
+# File extension to be used in the download, save, and loading
+_table_file_extension = '.sql.bz2'
 
 required_tables = [
     'dgmTypeAttributes',
@@ -150,3 +159,52 @@ def get_default_connection_details():
             'password': 'vagrant',
             'database': 'thanatos',
         }
+
+
+def load_tables_from_files(database_connection, tables):
+    """ Looks in the current working directory for all required tables. """
+
+    cursor = database_connection.cursor()
+
+    for table in tables:
+        table_name = get_table_filename(table)
+
+        with bz2.BZ2File(table_name, 'r') as sql_file:
+            sql = sql_file.read()
+            cursor.execute(sql)
+
+
+def download_tables(tables_list, base_url=_base_url):
+    """ Downloads a given list of tables from a given web site.
+
+    :param tables_list: A list of strings, each a table name to download.
+    :type tables_list: list
+
+    :return:
+    """
+    
+    _log.info('Downloading all required tables.')
+    
+    formatting_string = base_url + '{}' + _table_file_extension
+    
+    for table in tables_list:
+        full_url = formatting_string.format(table)
+        
+        _log.info('Downloading {}'.format(full_url))
+        
+        urllib.urlretrieve(full_url, table + _table_file_extension)
+    
+    _log.info('Finished downloading all required tables.')
+
+
+def get_table_filename(table_name):
+    """
+
+    :param table_name: Name of the table we want a filename for.
+    :type table_name:
+
+    :return: The filename to be loaded
+    :rtype: str
+    """
+
+    return table_name + _table_file_extension
