@@ -13,3 +13,6 @@ dist/
 # Thanatos
 *.sql.bz2
 *.sql
+
+# Sphinx
+docs/_build/
