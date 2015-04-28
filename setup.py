@@ -31,7 +31,6 @@ setup(
     url="https://github.com/Regner/thanatos",
     data_files=[('', ['README.md', 'LICENSE'])],
     install_requires=reqs,
-    scripts=['bin/thanatos'],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "License :: OSI Approved :: MIT License",
