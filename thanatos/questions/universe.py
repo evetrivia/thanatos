@@ -3,8 +3,7 @@
 import random
 import logging
 
-import thanatos.database
-
+from thanatos.database import universe
 from thanatos.questions.base import Question
 
 _log = logging.getLogger('thanatos.questions.universe')
@@ -13,7 +12,7 @@ _log = logging.getLogger('thanatos.questions.universe')
 class BorderingRegionsQuestion(Question):
     """ Asks what region boards another given region. """
 
-    category_primary   = 'Geography'
+    category_primary = 'Geography'
     category_secondary = 'Regions'
 
     random_weight = 10
@@ -26,18 +25,17 @@ class BorderingRegionsQuestion(Question):
     def ask(self):
         # Lets start by getting a region to base this all on and call it the source region
         # Lets ignore WH regions though
-        all_regions = thanatos.database.get_all_not_wh_regions(self.db_connection)
+        all_regions = universe.get_all_not_wh_regions(self.db_connection)
 
         # Before we pick our source region we need to remove the Jove regions of as they have no gates:
         all_regions = remove_regions_with_no_gates(all_regions)
-
 
         # Now pick our random source region
         source_region = random.choice(all_regions)
 
         # Next lets find a random region that is connected to the source region, this will be the answer
-        connected_regions = thanatos.database.get_all_regions_connected_to_region(self.db_connection, source_region[0])
-        correct_answer    = random.choice(connected_regions)
+        connected_regions = universe.get_all_regions_connected_to_region(self.db_connection, source_region[0])
+        correct_answer = random.choice(connected_regions)
 
         # Now we need to find the possible wrong answers
         # These regions need to not be connected to the source region
@@ -55,7 +53,7 @@ class BorderingRegionsQuestion(Question):
 class PoitotFamousForQuestion(Question):
     """ Asks what Poitot is famous for being. """
 
-    category_primary   = 'Geography'
+    category_primary = 'Geography'
     category_secondary = 'Miscellaneous'
 
     random_weight = 1
@@ -64,7 +62,7 @@ class PoitotFamousForQuestion(Question):
 
     def ask(self):
         correct_answer = (0, 'The only named system in Syndicate.')
-        
+
         # It would be great to add more here over time.
         possible_wrong_answers = [
             (1, 'Kind to animals.'),

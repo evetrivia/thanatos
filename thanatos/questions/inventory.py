@@ -13,7 +13,7 @@ _log = logging.getLogger('thanatos.questions.inventory')
 class HighSlotsQuestion(Question):
     """ Asks what region boards another given region. """
 
-    category_primary   = 'Inventory'
+    category_primary = 'Inventory'
     category_secondary = 'Slots'
 
     random_weight = 10

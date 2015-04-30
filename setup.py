@@ -3,21 +3,21 @@
 import os
 import pip
 
-from pip.req    import parse_requirements
+from pip.req import parse_requirements
 from setuptools import setup, find_packages
 
 from thanatos import __version__
 
 
 try:
-    readme_path     = os.path.join(os.path.dirname(__file__), "README.md")
+    readme_path = os.path.join(os.path.dirname(__file__), "README.md")
     readme_contents = open(readme_path).read()
 
 except IOError:
     readme_contents = ""
 
 install_reqs = parse_requirements('requirements.txt', session=pip.download.PipSession())
-reqs         = [str(ir.req) for ir in install_reqs]
+reqs = [str(ir.req) for ir in install_reqs]
 
 setup(
     name="Thanatos",

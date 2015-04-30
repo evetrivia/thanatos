@@ -3,6 +3,7 @@ venv/
 *.pyc
 *.egg-info/
 dist/
+build/
 
 # PyCharm
 .idea/
@@ -12,7 +13,6 @@ dist/
 
 # Thanatos
 *.sql.bz2
-*.sql
 
 # Sphinx
 docs/_build/

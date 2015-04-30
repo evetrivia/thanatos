@@ -25,6 +25,4 @@ def get_categories():
 
         categories[subclass.category_primary][subclass.category_secondary][subclass] = subclass.random_weight
 
-
-
     return categories
