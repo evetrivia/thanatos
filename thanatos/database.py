@@ -24,6 +24,20 @@ required_tables = [
     'mapRegionJumps',
 ]
 
+def execute_sql(sql, db_connection, fetchone=False):
+    """ Executes a given SQL statement with the given datbase connection. It also
+    converts the results from a tuple of tuples to a list of tuples.
+    
+    """
+    
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    
+    if fetchone:
+        return cursor.fetchone()
+    
+    return [x for x in cursor.fetchall()]
+
 
 def get_all_not_wh_regions(db_connection):
     """ Gets a list of all regions that are not WH regions.
