@@ -15,6 +15,13 @@ class QuestionsBaseTestCase(unittest2.TestCase):
         """ Simply test we can create an instance of the Test Question class. """
 
         TestableBaseQuestion()
+    
+    def test_basic_ask(self):
+        """ If this somehow breaks... something great has gone wrong. This test
+        simple exists to help bump the test coverage number up. The ask method
+        shouldn't actually do anything."""
+
+        TestableBaseQuestion().ask()
 
     @mock.patch('thanatos.questions.base.Question')
     @mock.patch('random.sample')
