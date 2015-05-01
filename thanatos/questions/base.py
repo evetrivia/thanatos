@@ -101,10 +101,3 @@ class Question(object):
             })
 
         return formatted_choices
-
-
-class TestableBaseQuestion(Question):
-    """ A subclass of the base class to test against. """
-
-    def ask(self):
-        pass

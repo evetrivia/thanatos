@@ -29,7 +29,7 @@ setup(
     author="Regner Blok-Andersen",
     author_email="regnerba@gmail.com",
     url="https://github.com/Regner/thanatos",
-    data_files=[('', ['README.md', 'LICENSE'])],
+    include_package_data=True,
     install_requires=reqs,
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

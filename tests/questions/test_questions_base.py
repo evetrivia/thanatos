@@ -3,7 +3,7 @@
 import mock
 import unittest2
 
-from thanatos.questions.base import TestableBaseQuestion
+from thanatos.questions.base import Question
 
 
 class QuestionsBaseTestCase(unittest2.TestCase):
@@ -81,3 +81,9 @@ class QuestionsBaseTestCase(unittest2.TestCase):
             {'text': 'J7HZ-F',  'value': 10000017L},
             {'text': 'Derelik', 'value': 10000001L},
         ])
+
+class TestableBaseQuestion(Question):
+    """ A subclass of the base class to test against. """
+
+    def ask(self):
+        pass
