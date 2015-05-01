@@ -11,23 +11,28 @@ class DatabaseInventoryTestCase(unittest2.TestCase):
     def setUp(self):
         pass
 
-    @mock.patch('thanatos.database.db_utils.execute_sql')
-    def test_get_all_published_ships_basic_calls_execute(self, mock_db_utils):
+    @mock.patch('thanatos.database.inventory.execute_sql')
+    def test_get_all_published_ships_basic(self, mock_execute_sql):
         """ Test we can call get all published ships basic. """
 
         mock_db_connection = mock.MagicMock()
+        mock_execute_sql.return_value = [(1, 'test')]
 
-        inventory.get_all_published_ships_basic(mock_db_connection)
+        results = inventory.get_all_published_ships_basic(mock_db_connection)
 
-        mock_db_utils().assert_called_with()
+        mock_execute_sql.assert_called_with('CALL get_all_published_ships_basic();', mock_db_connection)
+        self.assertEqual(results, [(1, 'test')])
 
-    def test_get_dogma_attribute_for_type_calls_execute(self):
-        """ Test we can call get spcified dogma attribute for specified type ID. """
+    @mock.patch('thanatos.database.inventory.execute_sql')
+    def test_get_dogma_attribute_for_type(self, mock_execute_sql):
+        """ Test we can call get specified dogma attribute for specified type ID. """
 
         mock_db_connection = mock.MagicMock()
-        mock_type_id = 000
+        mock_type_id = 0
         mock_dogma_attribute = 111
+        mock_execute_sql.return_value = [(1, 'test')]
 
-        inventory.get_dogma_attribute_for_type(mock_db_connection, mock_type_id, mock_dogma_attribute)
+        results = inventory.get_dogma_attribute_for_type(mock_db_connection, mock_type_id, mock_dogma_attribute)
 
-        mock_db_connection.cursor().execute.assert_was_called()
+        mock_execute_sql.assert_called_with('CALL get_dogma_attribute_for_type(0, 111);', mock_db_connection, fetch_one=True)
+        self.assertEqual(results, [(1, 'test')])

@@ -17,13 +17,13 @@ class HighSlotsQuestionTestCase(unittest2.TestCase):
 
         inventory.HighSlotsQuestion(self.mock_db_connection)
 
-    @mock.patch('thanatos.database')
+    @mock.patch('thanatos.questions.inventory.inventory')
     @mock.patch('thanatos.questions.base.Question.format_question')
-    def test_question_ask(self, mock_format_question, mock_db_methods):
+    def test_question_ask(self, mock_format_question, mock_db_inventory):
         """ Test we can call the high slots question ask method. """
 
-        mock_db_methods.get_all_published_ships_basic.return_value = [(582L, 'Bantam', 25L, 'Frigate', 6L, 'Ship')]
-        mock_db_methods.get_dogma_attribute_for_type.return_value = 3
+        mock_db_inventory.get_all_published_ships_basic.return_value = [(582L, 'Bantam', 25L, 'Frigate', 6L, 'Ship')]
+        mock_db_inventory.get_dogma_attribute_for_type.return_value = 3
 
         inventory.HighSlotsQuestion(self.mock_db_connection).ask()
 

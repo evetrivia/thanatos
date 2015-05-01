@@ -17,10 +17,10 @@ class BorderingRegionsTestCase(unittest2.TestCase):
 
         universe.BorderingRegionsQuestion(self.mock_db_connection)
 
-    @mock.patch('thanatos.database')
+    @mock.patch('thanatos.questions.universe.universe')
     @mock.patch('thanatos.questions.base.Question.format_question')
     @mock.patch('random.choice')
-    def test_question_ask(self, random_choice, mock_format_question, mock_db_methods):
+    def test_question_ask(self, random_choice, mock_format_question, mock_db_universe):
         """ Test we can call the bordering region question ask method. """
 
         all_regions = [
@@ -32,14 +32,14 @@ class BorderingRegionsTestCase(unittest2.TestCase):
             (10000006L, 'Region Six'),
         ]
 
-        mock_db_methods.get_all_not_wh_regions.return_value = all_regions
+        mock_db_universe.get_all_not_wh_regions.return_value = all_regions
 
         random_choice.side_effect = [
             (10000001L, 'Region One'),
             (10000005L, 'Region Five'),
         ]
 
-        mock_db_methods.get_all_regions_connected_to_region.return_value = [
+        mock_db_universe.get_all_regions_connected_to_region.return_value = [
             (10000005L, 'Region Five'),
             (10000006L, 'Region Six'),
         ]
