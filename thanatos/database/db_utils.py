@@ -41,9 +41,14 @@ def execute_sql(sql, db_connection, fetch_one=False):
     cursor.execute(sql)
 
     if fetch_one:
-        return cursor.fetchone()
+        results = cursor.fetchone()
+    
+    else:
+        results = [x for x in cursor.fetchall()]
+    
+    cursor.close()
 
-    return [x for x in cursor.fetchall()]
+    return results
 
 
 def update_sql_stored_procs(db_connection):
@@ -59,14 +64,11 @@ def update_sql_stored_procs(db_connection):
     for sql_file_name in os.listdir(sql_dir_path):
         _log.info('Running {}'.format(sql_file_name))
 
-        cursor = db_connection.cursor()
-
         sql_file_path = os.path.join(sql_dir_path, sql_file_name)
         sql_file = open(sql_file_path)
         sql = " ".join(sql_file.readlines())
 
-        cursor.execute(sql)
-        cursor.close()
+        execute_sql(sql, db_connection)
 
 
 def get_connection(connection_details=None):
