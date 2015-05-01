@@ -7,7 +7,7 @@ from thanatos.questions.base import Question
 _log = logging.getLogger('thanatos.utils')
 
 
-def get_categories():
+def get_all_categories():
     """
 
     :return: A dictionary of sets representing the categories and their sub categories.

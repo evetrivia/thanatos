@@ -32,7 +32,7 @@ class DatabaseUtilsTestCase(unittest2.TestCase):
 
     @mock.patch('os.environ')
     def test_db_connection_defaults(self, mock_environ):
-        """ Test that the default connection details get set correctly when run on C9. """
+        """ Test that the default connection details get set correctly when not run on C9. """
 
         mock_environ.get.return_value = None
 

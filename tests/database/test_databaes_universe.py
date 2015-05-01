@@ -13,7 +13,7 @@ class DatabaseUniverseTestCase(unittest2.TestCase):
 
     @mock.patch('thanatos.database.universe.execute_sql')
     def test_get_all_regions(self, mock_execute_sql):
-        """ Test we can call get all published ships basic. """
+        """  """
 
         mock_db_connection = mock.MagicMock()
         mock_execute_sql.return_value = [(1, 'test')]
@@ -25,7 +25,7 @@ class DatabaseUniverseTestCase(unittest2.TestCase):
 
     @mock.patch('thanatos.database.universe.execute_sql')
     def test_get_all_not_wh_regions(self, mock_execute_sql):
-        """ Test we can call get all published ships basic. """
+        """  """
 
         mock_db_connection = mock.MagicMock()
         mock_execute_sql.return_value = [(1, 'test')]
@@ -37,7 +37,7 @@ class DatabaseUniverseTestCase(unittest2.TestCase):
 
     @mock.patch('thanatos.database.universe.execute_sql')
     def test_get_all_regions_connected_to_region(self, mock_execute_sql):
-        """ Test we can call get all published ships basic. """
+        """  """
 
         mock_db_connection = mock.MagicMock()
         mock_region_id = 101
