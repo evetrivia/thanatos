@@ -31,6 +31,6 @@ def get_dogma_attribute_for_type(db_connection, type_id, dogma_attribute):
     """
 
     sql = 'CALL get_dogma_attribute_for_type({}, {});'.format(type_id, dogma_attribute)
-    results = execute_sql(sql, db_connection, fetch_one=True)
+    results = execute_sql(sql, db_connection, fetch='one')
 
     return results

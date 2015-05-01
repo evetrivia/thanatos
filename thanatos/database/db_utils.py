@@ -27,28 +27,30 @@ _required_tables = [
 ]
 
 
-def execute_sql(sql, db_connection, fetch_one=False):
+def execute_sql(sql, db_connection, fetch=None):
     """
 
     :param sql:
     :param db_connection:
+    :param fetch: A string of either all or one.
 
     :return:
     """
 
     cursor = db_connection.cursor()
 
-    try:
-        cursor.execute(sql)
+    cursor.execute(sql)
 
-        if fetch_one:
-            results = cursor.fetchone()
+    if fetch == 'all':
+        results = [x for x in cursor.fetchall()]
 
-        else:
-            results = [x for x in cursor.fetchall()]
+    elif fetch == 'one':
+        results = cursor.fetchone()
 
-    finally:
-        cursor.close()
+    else:
+        results = None
+
+    cursor.close()
 
     return results
 
@@ -70,7 +72,7 @@ def update_sql_stored_procs(db_connection):
         sql_file = open(sql_file_path)
         sql = " ".join(sql_file.readlines())
 
-        execute_sql(sql, db_connection)
+        execute_sql(sql, db_connection, fetch=None)
 
 
 def get_connection(connection_details=None):

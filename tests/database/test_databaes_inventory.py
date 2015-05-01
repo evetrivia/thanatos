@@ -34,5 +34,5 @@ class DatabaseInventoryTestCase(unittest2.TestCase):
 
         results = inventory.get_dogma_attribute_for_type(mock_db_connection, mock_type_id, mock_dogma_attribute)
 
-        mock_execute_sql.assert_called_with('CALL get_dogma_attribute_for_type(0, 111);', mock_db_connection, fetch_one=True)
+        mock_execute_sql.assert_called_with('CALL get_dogma_attribute_for_type(0, 111);', mock_db_connection, fetch='one')
         self.assertEqual(results, [(1, 'test')])
