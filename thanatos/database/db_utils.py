@@ -38,15 +38,17 @@ def execute_sql(sql, db_connection, fetch_one=False):
 
     cursor = db_connection.cursor()
 
-    cursor.execute(sql)
+    try:
+        cursor.execute(sql)
 
-    if fetch_one:
-        results = cursor.fetchone()
-    
-    else:
-        results = [x for x in cursor.fetchall()]
-    
-    cursor.close()
+        if fetch_one:
+            results = cursor.fetchone()
+
+        else:
+            results = [x for x in cursor.fetchall()]
+
+    finally:
+        cursor.close()
 
     return results
 
@@ -92,7 +94,7 @@ def get_default_connection_details():
     :rtype: dict
     """
 
-    _log.info('Getting default database connetion details.')
+    _log.info('Getting default database connection details.')
 
     if os.environ.get('C9_PROJECT') is not None:
         _log.info('C9_PROJECT environment found. Getting C9 DB connection details.')
