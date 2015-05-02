@@ -20,6 +20,9 @@ class Question(object):
     category = None
     sub_category = None
 
+    def __init__(self, db_connection):
+        self.db_connection = db_connection
+
     @abstractmethod
     def ask(self):
         """ ask is called whenever attempting to get a question.

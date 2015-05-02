@@ -22,9 +22,6 @@ class BorderingRegionsQuestion(Question):
 
     question = 'Which of the following regions borders the {} region?'
 
-    def __init__(self, database_connection):
-        self.db_connection = database_connection
-
     def ask(self):
         # Lets start by getting a region to base this all on and call it the source region
         # Lets ignore WH regions though

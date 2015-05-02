@@ -27,9 +27,6 @@ class HighSlotsQuestion(Question):
     slots_min = 0
     slots_max = 9  # 1 more than the max of 8 do to how range works
 
-    def __init__(self, db_connection):
-        self.db_connection = db_connection
-
     def ask(self):
         all_ships = inventory.get_all_published_ships_basic(self.db_connection)
 
