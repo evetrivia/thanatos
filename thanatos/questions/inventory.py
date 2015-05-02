@@ -3,6 +3,7 @@
 import random
 import logging
 
+from thanatos import categories
 from thanatos.database import inventory
 from thanatos.questions.base import Question
 
@@ -12,8 +13,8 @@ _log = logging.getLogger('thanatos.questions.inventory')
 class HighSlotsQuestion(Question):
     """ Asks what region boards another given region. """
 
-    category_primary = 'Inventory'
-    category_secondary = 'Slots'
+    category = categories.inventory
+    sub_category = categories.inventory_slots
 
     random_weight = 10
 

@@ -3,6 +3,7 @@
 import random
 import logging
 
+from thanatos import categories
 from thanatos.database import universe
 from thanatos.questions.base import Question
 
@@ -12,8 +13,8 @@ _log = logging.getLogger('thanatos.questions.universe')
 class BorderingRegionsQuestion(Question):
     """ Asks what region boards another given region. """
 
-    category_primary = 'Geography'
-    category_secondary = 'Regions'
+    category = categories.geography
+    sub_category = categories.geography_regions
 
     random_weight = 10
 
@@ -53,8 +54,8 @@ class BorderingRegionsQuestion(Question):
 class PoitotFamousForQuestion(Question):
     """ Asks what Poitot is famous for being. """
 
-    category_primary = 'Geography'
-    category_secondary = 'Miscellaneous'
+    category = categories.geography
+    category_secondary = categories.geography_miscellaneous
 
     random_weight = 1
 
