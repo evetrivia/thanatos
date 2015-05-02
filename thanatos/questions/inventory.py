@@ -13,6 +13,8 @@ _log = logging.getLogger('thanatos.questions.inventory')
 class HighSlotsQuestion(Question):
     """ Asks what region boards another given region. """
 
+    name = 'High Slots'
+    description = 'Asks how many high slots a given ship has.'
     category = categories.inventory
     sub_category = categories.inventory_slots
 

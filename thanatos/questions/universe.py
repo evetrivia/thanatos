@@ -13,6 +13,8 @@ _log = logging.getLogger('thanatos.questions.universe')
 class BorderingRegionsQuestion(Question):
     """ Asks what region boards another given region. """
 
+    name = 'Bordering Regions'
+    description = 'Asks what region borders another region.'
     category = categories.geography
     sub_category = categories.geography_regions
 
@@ -54,8 +56,10 @@ class BorderingRegionsQuestion(Question):
 class PoitotFamousForQuestion(Question):
     """ Asks what Poitot is famous for being. """
 
+    name = 'Poitot'
+    description = 'Asks what the Poitot solar system is famous for being.'
     category = categories.geography
-    category_secondary = categories.geography_miscellaneous
+    sub_category = categories.geography_miscellaneous
 
     random_weight = 1
 

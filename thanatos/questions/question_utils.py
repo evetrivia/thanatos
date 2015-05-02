@@ -59,6 +59,16 @@ def get_random_question():
     return choice(questions)
 
 
+def get_question(question_id):
+    subclasses = get_question_subclasses()
+    
+    for subclass in subclasses:
+        if subclass.__name__.lower() == question_id:
+            return subclass
+    
+    return None
+
+
 def get_question_from_category(category):
     questions = []
     subclasses = get_question_subclasses()
@@ -69,6 +79,7 @@ def get_question_from_category(category):
                 questions.extend(repeat(question, question.random_weight))
 
     return choice(questions)
+
 
 def get_question_from_sub_category(category, sub_category):
     questions = []
