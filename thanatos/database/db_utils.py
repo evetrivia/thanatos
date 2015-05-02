@@ -27,7 +27,7 @@ _required_tables = [
 ]
 
 
-def execute_sql(sql, db_connection, fetch=None):
+def execute_sql(sql, db_connection, fetch='all'):
     """
 
     :param sql:
