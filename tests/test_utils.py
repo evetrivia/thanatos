@@ -3,7 +3,7 @@
 import mock
 import unittest2
 
-from thanatos import utils
+from thanatos.questions import question_utils
 
 
 class ThanatosUtilsTestCase(unittest2.TestCase):
@@ -11,7 +11,7 @@ class ThanatosUtilsTestCase(unittest2.TestCase):
     def setUp(self):
         pass
 
-    @mock.patch('thanatos.utils.get_question_subclasses')
+    @mock.patch('thanatos.question_utils.get_question_subclasses')
     def test_get_all_categories(self, mock_question):
         """  """
         pass
@@ -54,7 +54,7 @@ class ThanatosUtilsTestCase(unittest2.TestCase):
         
         mock_question.return_value = mock_subclasses
         
-        results = utils.get_all_categories()
+        results = question_utils.get_all_categories()
         
         mock_question.assert_was_called()
         self.assertEqual(results, {
@@ -75,4 +75,4 @@ class ThanatosUtilsTestCase(unittest2.TestCase):
         })
     
     def test_get_question_subclasses(self):
-        utils.get_question_subclasses()
+        question_utils.get_question_subclasses()

@@ -1,8 +1,6 @@
-
-
 import logging
 
-from thanatos import utils
+from thanatos.questions import question_utils
 
 __version__ = '0.0.6'
 
