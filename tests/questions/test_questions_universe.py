@@ -62,18 +62,18 @@ class BorderingRegionsTestCase(unittest2.TestCase):
 class PoitotTestCase(unittest2.TestCase):
 
     def setUp(self):
-        pass
+        self.mock_db_connection = mock.Mock(spec=MySQLdb.connection)
 
     def test_class_initializes(self):
         """ Simply test we can create an instance of the Poitot questions class. """
 
-        universe.PoitotFamousForQuestion()
+        universe.PoitotFamousForQuestion(self.mock_db_connection)
 
     @mock.patch('thanatos.questions.base.Question.format_question')
     def test_question_ask(self, mock_format_question):
         """ Test we can call the poitot question ask method. """
 
-        universe.PoitotFamousForQuestion().ask()
+        universe.PoitotFamousForQuestion(self.mock_db_connection).ask()
 
         mock_format_question.assert_called_with(
             (0, 'The only named system in Syndicate.'),

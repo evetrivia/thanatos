@@ -1,6 +1,7 @@
 
 
 import mock
+import MySQLdb
 import unittest2
 
 from thanatos.questions.base import Question
@@ -9,19 +10,19 @@ from thanatos.questions.base import Question
 class QuestionsBaseTestCase(unittest2.TestCase):
 
     def setUp(self):
-        pass
+        self.mock_db_connection = mock.Mock(spec=MySQLdb.connection)
 
     def test_class_initializes(self):
         """ Simply test we can create an instance of the Test Question class. """
 
-        TestableBaseQuestion()
+        TestableBaseQuestion(self.mock_db_connection)
     
     def test_basic_ask(self):
         """ If this somehow breaks... something great has gone wrong. This test
         simple exists to help bump the test coverage number up. The ask method
         shouldn't actually do anything."""
 
-        TestableBaseQuestion().ask()
+        TestableBaseQuestion(self.mock_db_connection).ask()
 
     @mock.patch('thanatos.questions.base.Question')
     @mock.patch('random.sample')
@@ -38,7 +39,7 @@ class QuestionsBaseTestCase(unittest2.TestCase):
 
         mock_sample.return_value = possible_wrong_answers
 
-        test_question = TestableBaseQuestion()
+        test_question = TestableBaseQuestion(self.mock_db_connection)
         question      = test_question.format_question(correct_answer, possible_wrong_answers, question)
 
         mock_shuffle.assert_called_with([
@@ -73,7 +74,7 @@ class QuestionsBaseTestCase(unittest2.TestCase):
             (10000001L, 'Derelik'),
         ]
 
-        test_question     = TestableBaseQuestion()
+        test_question     = TestableBaseQuestion(self.mock_db_connection)
         converted_choices = test_question.convert_choices_to_dict(choices)
 
         self.assertEqual(converted_choices, [
@@ -81,6 +82,7 @@ class QuestionsBaseTestCase(unittest2.TestCase):
             {'text': 'J7HZ-F',  'value': 10000017L},
             {'text': 'Derelik', 'value': 10000001L},
         ])
+
 
 class TestableBaseQuestion(Question):
     """ A subclass of the base class to test against. """

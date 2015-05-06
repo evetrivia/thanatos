@@ -7,7 +7,7 @@ import unittest2
 from thanatos.questions import inventory
 
 
-class HighSlotsQuestionTestCase(unittest2.TestCase):
+class SlotsQuestionTestCase(unittest2.TestCase):
 
     def setUp(self):
         self.mock_db_connection = mock.Mock(spec=MySQLdb.connection)
@@ -15,7 +15,7 @@ class HighSlotsQuestionTestCase(unittest2.TestCase):
     def test_class_initializes(self):
         """ Simply test we can create an instance of the class. """
 
-        inventory.HighSlotsQuestion(self.mock_db_connection)
+        inventory.SlotsQuestion(self.mock_db_connection)
 
     @mock.patch('thanatos.questions.inventory.inventory')
     @mock.patch('thanatos.questions.base.Question.format_question')
@@ -25,7 +25,7 @@ class HighSlotsQuestionTestCase(unittest2.TestCase):
         mock_db_inventory.get_all_published_ships_basic.return_value = [(582L, 'Bantam', 25L, 'Frigate', 6L, 'Ship')]
         mock_db_inventory.get_dogma_attribute_for_type.return_value = 3
 
-        inventory.HighSlotsQuestion(self.mock_db_connection).ask()
+        inventory.SlotsQuestion(self.mock_db_connection).ask()
 
         mock_format_question.assert_called_with(
             (3, 3),

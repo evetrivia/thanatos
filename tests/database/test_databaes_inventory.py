@@ -30,9 +30,23 @@ class DatabaseInventoryTestCase(unittest2.TestCase):
         mock_db_connection = mock.MagicMock()
         mock_type_id = 0
         mock_dogma_attribute = 111
-        mock_execute_sql.return_value = [(1, 'test')]
+        mock_execute_sql.return_value = (1, 'test')
 
         results = inventory.get_dogma_attribute_for_type(mock_db_connection, mock_type_id, mock_dogma_attribute)
 
         mock_execute_sql.assert_called_with('CALL get_dogma_attribute_for_type(0, 111);', mock_db_connection, fetch='one')
-        self.assertEqual(results, [(1, 'test')])
+        self.assertEqual(results, 1)
+
+    @mock.patch('thanatos.database.inventory.execute_sql')
+    def test_get_dogma_attribute_for_type_handles_none(self, mock_execute_sql):
+        """ Test we can call get specified dogma attribute for specified type ID. """
+
+        mock_db_connection = mock.MagicMock()
+        mock_type_id = 0
+        mock_dogma_attribute = 111
+        mock_execute_sql.return_value = None
+
+        results = inventory.get_dogma_attribute_for_type(mock_db_connection, mock_type_id, mock_dogma_attribute)
+
+        mock_execute_sql.assert_called_with('CALL get_dogma_attribute_for_type(0, 111);', mock_db_connection, fetch='one')
+        self.assertEqual(results, None)
