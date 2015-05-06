@@ -38,7 +38,6 @@ def execute_sql(sql, db_connection, fetch='all'):
     """
 
     cursor = db_connection.cursor()
-
     cursor.execute(sql)
 
     if fetch == 'all':
