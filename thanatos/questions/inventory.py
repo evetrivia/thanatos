@@ -40,13 +40,13 @@ class SlotsQuestion(Question):
         chosen_ship = random.choice(all_ships)
         chosen_slot = random.choice(self.slots.keys())
 
-        high_slots = int(inventory.get_dogma_attribute_for_type(
+        slot_count = int(inventory.get_dogma_attribute_for_type(
             self.db_connection,
             chosen_ship[0],
             self.slots[chosen_slot])
         )
 
-        correct_answer = (high_slots, high_slots)
+        correct_answer = (slot_count, slot_count)
 
         possible_answers = range(self.slots_min, self.slots_max)
         possible_wrong_answers = list(set(possible_answers) - set([correct_answer[0]]))
