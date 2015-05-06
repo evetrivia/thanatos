@@ -59,3 +59,27 @@ class SlotsQuestion(Question):
                 question = self.format_question(correct_answer, possible_wrong_answers, self.question.format(chosen_slot, chosen_ship[1]))
 
                 return question
+
+
+class ShipImageIdentificationQuestion(Question):
+    """ Asks the user to select the correct ship based on an image server link. """
+
+    name = 'Ship Image Identification'
+    description = 'Pick what ship is shown in the provided image.'
+    category = categories.inventory
+    sub_category = categories.inventory_ship_id
+
+    random_weight = 8
+
+    question = 'What ship is pictured?'
+
+    def ask(self):
+        all_ships = inventory.get_all_published_ships_basic(self.db_connection)
+        chosen_ship = random.choice(all_ships)
+
+        possible_wrong_answers = list(set(all_ships) - set([chosen_ship[0]]))
+        possible_wrong_answers = [(x, x) for x in possible_wrong_answers]
+
+        question = self.format_question(chosen_ship, possible_wrong_answers, self.question, add_images_to_question=True)
+
+        return question

@@ -27,3 +27,8 @@ inventory_slots = {
     'name': 'Slots',
     'description': 'Questions about the number of different slots ships have.',
 }
+
+inventory_ship_id = {
+    'name': 'Ship ID',
+    'description': 'Questions asking to identify what ship is being described.',
+}

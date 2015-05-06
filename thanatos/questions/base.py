@@ -5,6 +5,8 @@ import logging
 
 from abc import ABCMeta, abstractmethod
 
+from thanatos.ccp_image_server import get_type_links
+
 _log = logging.getLogger('thanatos.questions.base')
 
 
@@ -33,7 +35,7 @@ class Question(object):
 
         pass
 
-    def format_question(self, correct_answer, possible_wrong_answers, question):
+    def format_question(self, correct_answer, possible_wrong_answers, question, add_images_to_question=False):
         """ Takes a set of values and converts it to the standard format
         expected as a return from self.ask().
 
@@ -65,6 +67,9 @@ class Question(object):
             'question': question,
             'choices': self.convert_choices_to_dict(choices)
         }
+
+        if add_images_to_question is True:
+            question['images'] = get_type_links(correct_answer[0])
 
         return question
 
