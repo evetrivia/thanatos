@@ -78,7 +78,7 @@ class ShipImageIdentificationQuestion(Question):
         chosen_ship = random.choice(all_ships)
 
         possible_wrong_answers = list(set(all_ships) - set([chosen_ship[0]]))
-        possible_wrong_answers = [(x, x) for x in possible_wrong_answers]
+        possible_wrong_answers = [(x[0], x[1]) for x in possible_wrong_answers]
 
         question = self.format_question(chosen_ship, possible_wrong_answers, self.question, add_images_to_question=True)
 
