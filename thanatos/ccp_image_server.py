@@ -2,7 +2,9 @@
 
 def get_character_image_links(character_id):
     """ Takes a character ID and returns a dict with all available size links.
+
     :param character_id: A character ID from EVE.
+
     :return: A dict of size and urls.
     """
 
@@ -17,7 +19,9 @@ def get_character_image_links(character_id):
 
 def get_corporation_image_links(corporation_id):
     """ Takes a character ID and returns a dict with all available size links.
+
     :param corporation_id: A corporation ID from EVE.
+
     :return: A dict of size and urls.
     """
 
@@ -32,7 +36,9 @@ def get_corporation_image_links(corporation_id):
 
 def get_type_links(type_id):
     """ Takes a type ID and returns a dict with all available size links.
+
     :param corporation_id: An EVE typeID.
+
     :return: A dict of size and urls.
     """
 
@@ -53,9 +59,11 @@ def get_image_server_link(image_id, image_type, icon_size=128):
     Alliance: 32, 64, 128
     Faction: 32, 64, 128
     Types: 32, 64, 128, 256, 512
+
     :param image_id: ID to be used in the URL.
     :param image_type: Valid string options are: char, corp, alli, fac, type
     :param icon_size: See doc string for valid image sizes.
+
     :return: A full URL to the CCP image server.
     """
 

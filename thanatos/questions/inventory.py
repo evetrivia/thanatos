@@ -43,14 +43,14 @@ class SlotsQuestion(Question):
         while True:
             chosen_ship = random.choice(all_ships)
 
-            slot_count = int(inventory.get_dogma_attribute_for_type(
+            slot_count = inventory.get_dogma_attribute_for_type(
                 self.db_connection,
                 chosen_ship[0],
-                self.slots[chosen_slot])
+                self.slots[chosen_slot]
             )
 
             if slot_count is not None:
-                correct_answer = (slot_count, slot_count)
+                correct_answer = (int(slot_count), int(slot_count))
 
                 possible_answers = range(self.slots_min, self.slots_max)
                 possible_wrong_answers = list(set(possible_answers) - set([correct_answer[0]]))
@@ -77,7 +77,7 @@ class ShipImageIdentificationQuestion(Question):
         all_ships = inventory.get_all_published_ships_basic(self.db_connection)
         chosen_ship = random.choice(all_ships)
 
-        possible_wrong_answers = list(set(all_ships) - set([chosen_ship[0]]))
+        possible_wrong_answers = list(set(all_ships) - set([chosen_ship]))
         possible_wrong_answers = [(x[0], x[1]) for x in possible_wrong_answers]
 
         question = self.format_question(chosen_ship, possible_wrong_answers, self.question, add_images_to_question=True)
