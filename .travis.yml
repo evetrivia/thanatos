@@ -20,13 +20,5 @@ deploy:
     secure: KL9ECUyJCQcfut8glKhEhVAt5PD22JpywA9CJ5gtLSpmP7KUor1cn65c82q5tqVnph3hGrpFuz107V+/l24n4z4V5bF9qmdmttnhgGBjRFcr965u4F3P5Vz/7+oGSwWfhcdZ9Kon8/Ex1HP7GsCdx9Vl2/6ew8eCMGWCKvTrsxI=
   on:
     tags: true
-    repo: Regner/thanatos
+    repo: evelink/thanatos
   distributions: "sdist bdist_wheel"
-
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/b02cabf6ccb21d2984da
-    on_success: always
-    on_failure: always
-    on_start: false
