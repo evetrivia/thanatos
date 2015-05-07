@@ -55,7 +55,6 @@ def get_random_question():
     for subclass in subclasses:
         questions.extend(repeat(subclass, subclass.random_weight))
 
-    
     return choice(questions)
 
 
@@ -66,7 +65,7 @@ def get_question(question_id):
         if subclass.__name__.lower() == question_id:
             return subclass
     
-    return None
+    raise InvalidQuestionException('The specified question does not exist.')
 
 
 def get_question_from_category(category):
@@ -78,7 +77,9 @@ def get_question_from_category(category):
             if question.category['name'].lower() == category:
                 questions.extend(repeat(question, question.random_weight))
 
-    return choice(questions)
+                return choice(questions)
+
+    raise InvalidQuestionCategoryException('The category specified is invalid.')
 
 
 def get_question_from_sub_category(category, sub_category):
@@ -91,4 +92,14 @@ def get_question_from_sub_category(category, sub_category):
                 if question.sub_category['name'].lower() == sub_category:
                     questions.extend(repeat(question, question.random_weight))
 
-    return choice(questions)
+                    return choice(questions)
+
+    raise InvalidQuestionCategoryException('Either the category or sub-category specified is invalid.')
+
+
+class InvalidQuestionCategoryException(Exception):
+    pass
+
+
+class InvalidQuestionException(Exception):
+    pass
