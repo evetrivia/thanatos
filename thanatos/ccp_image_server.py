@@ -9,10 +9,7 @@ def get_character_image_links(character_id):
     """
 
     sizes = 32, 64, 128, 256, 512, 1024
-    return_dict = {}
-
-    for x in sizes:
-        return_dict[x] = get_image_server_link(character_id, 'char', x)
+    return_dict = {x: get_image_server_link(character_id, 'char', x) for x in sizes}
 
     return return_dict
 
@@ -26,10 +23,7 @@ def get_corporation_image_links(corporation_id):
     """
 
     sizes = 32, 64, 128, 256
-    return_dict = {}
-
-    for x in sizes:
-        return_dict[x] = get_image_server_link(corporation_id, 'corp', x)
+    return_dict = {x: get_image_server_link(corporation_id, 'corp', x) for x in sizes}
 
     return return_dict
 
@@ -43,10 +37,7 @@ def get_type_links(type_id):
     """
 
     sizes = 32, 64, 128, 256, 512
-    return_dict = {}
-
-    for x in sizes:
-        return_dict[x] = get_image_server_link(type_id, 'type', x)
+    return_dict = {x: get_image_server_link(type_id, 'type', x) for x in sizes}
 
     return return_dict
 
