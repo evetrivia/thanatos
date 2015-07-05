@@ -61,23 +61,23 @@ def get_image_server_link(image_id, image_type, icon_size=128):
     base_image_server_url = 'https://image.eveonline.com/'
 
     if image_type == 'char':
-        url_type   = 'Character'
+        url_type = 'Character'
         url_format = 'jpg'
 
     elif image_type == 'corp':
-        url_type   = 'Corporation'
+        url_type = 'Corporation'
         url_format = 'png'
 
     elif image_type == 'alli':
-        url_type   = 'Alliance'
+        url_type = 'Alliance'
         url_format = 'png'
 
     elif image_type == 'fac':
-        url_type   = 'Alliance'
+        url_type = 'Alliance'
         url_format = 'png'
 
     else:
-        url_type   = 'Render'
+        url_type = 'Render'
         url_format = 'png'
 
     full_url = "%s%s/%s_%s.%s" % (base_image_server_url, url_type, image_id, icon_size, url_format)

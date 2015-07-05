@@ -7,7 +7,7 @@ from thanatos import categories
 from thanatos.database import universe
 from thanatos.questions.base import Question
 
-_log = logging.getLogger('thanatos.questions.universe')
+_log = logging.getLogger('thanatos')
 
 
 class BorderingRegionsQuestion(Question):

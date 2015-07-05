@@ -7,7 +7,7 @@ from thanatos import categories
 from thanatos.database import inventory
 from thanatos.questions.base import Question
 
-_log = logging.getLogger('thanatos.questions.inventory')
+_log = logging.getLogger('thanatos')
 
 
 class SlotsQuestion(Question):

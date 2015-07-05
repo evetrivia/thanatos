@@ -1,5 +1,6 @@
 # Python
 venv/
+env/
 *.pyc
 *.egg-info/
 dist/
@@ -10,9 +11,6 @@ build/
 
 # Vagrant
 .vagrant/
-
-# Thanatos
-*.sql.bz2
 
 # Sphinx
 docs/_build/

@@ -1,3 +1,4 @@
 include LICENSE
 include README.md
-recursive-include thanatos/database/sql *
+recursive-include thanatos/database/procs *
+recursive-include thanatos/database/sde *

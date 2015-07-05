@@ -7,7 +7,7 @@ from abc import ABCMeta, abstractmethod
 
 from thanatos.ccp_image_server import get_type_links
 
-_log = logging.getLogger('thanatos.questions.base')
+_log = logging.getLogger('thanatos')
 
 
 class Question(object):

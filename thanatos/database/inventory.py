@@ -4,7 +4,7 @@ import logging
 
 from thanatos.database.db_utils import execute_sql
 
-_log = logging.getLogger('thanatos.database.inventory')
+_log = logging.getLogger('thanatos')
 
 
 def get_all_published_ships_basic(db_connection):

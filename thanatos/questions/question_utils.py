@@ -7,7 +7,7 @@ from itertools import repeat
 
 from thanatos.questions.base import Question
 
-_log = logging.getLogger('thanatos.utils')
+_log = logging.getLogger('thanatos')
 
 
 def get_all_question_details():
