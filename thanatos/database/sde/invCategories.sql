@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.12, for Linux (x86_64)
 --
--- Host: localhost    Database: sdecarnyx1
+-- Host: localhost    Database: sdeaegis1
 -- ------------------------------------------------------
 -- Server version	5.6.12
 
@@ -25,7 +25,6 @@ DROP TABLE IF EXISTS `invCategories`;
 CREATE TABLE `invCategories` (
   `categoryID` int(11) NOT NULL,
   `categoryName` varchar(100) DEFAULT NULL,
-  `description` varchar(3000) DEFAULT NULL,
   `iconID` int(11) DEFAULT NULL,
   `published` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`categoryID`)
@@ -38,7 +37,7 @@ CREATE TABLE `invCategories` (
 
 LOCK TABLES `invCategories` WRITE;
 /*!40000 ALTER TABLE `invCategories` DISABLE KEYS */;
-INSERT INTO `invCategories` VALUES (0,'#System',NULL,NULL,0),(1,'Owner',NULL,NULL,0),(2,'Celestial',NULL,NULL,1),(3,'Station',NULL,NULL,0),(4,'Material',NULL,22,1),(5,'Accessories',NULL,33,1),(6,'Ship',NULL,NULL,1),(7,'Module',NULL,67,1),(8,'Charge',NULL,NULL,1),(9,'Blueprint',NULL,21,1),(10,'Trading',NULL,NULL,0),(11,'Entity',NULL,NULL,0),(14,'Bonus',NULL,0,0),(16,'Skill',NULL,33,1),(17,'Commodity',NULL,0,1),(18,'Drone',NULL,0,1),(20,'Implant',NULL,0,1),(22,'Deployable',NULL,0,1),(23,'Starbase',NULL,0,1),(24,'Reaction',NULL,0,1),(25,'Asteroid',NULL,NULL,1),(26,'WorldSpace',NULL,NULL,0),(29,'Abstract',NULL,NULL,0),(30,'Apparel',NULL,NULL,1),(32,'Subsystem',NULL,NULL,1),(34,'Ancient Relics',NULL,NULL,1),(35,'Decryptors',NULL,NULL,1),(39,'Infrastructure Upgrades',NULL,NULL,1),(40,'Sovereignty Structures',NULL,NULL,1),(41,'Planetary Interaction',NULL,NULL,1),(42,'Planetary Resources',NULL,NULL,1),(43,'Planetary Commodities',NULL,NULL,1),(46,'Orbitals',NULL,NULL,1),(49,'Placeables',NULL,NULL,0),(53,'Effects',NULL,NULL,0),(54,'Lights',NULL,NULL,0),(59,'Cells',NULL,NULL,0),(63,'Special Edition Assets',NULL,NULL,1),(65,'Structure',NULL,NULL,1),(350001,'Infantry',NULL,NULL,0);
+INSERT INTO `invCategories` VALUES (0,'#System',NULL,0),(1,'Owner',NULL,0),(2,'Celestial',NULL,1),(3,'Station',NULL,0),(4,'Material',22,1),(5,'Accessories',33,1),(6,'Ship',NULL,1),(7,'Module',67,1),(8,'Charge',NULL,1),(9,'Blueprint',21,1),(10,'Trading',NULL,0),(11,'Entity',NULL,0),(14,'Bonus',0,0),(16,'Skill',33,1),(17,'Commodity',0,1),(18,'Drone',0,1),(20,'Implant',0,1),(22,'Deployable',0,1),(23,'Starbase',0,1),(24,'Reaction',0,1),(25,'Asteroid',NULL,1),(26,'WorldSpace',NULL,0),(29,'Abstract',NULL,0),(30,'Apparel',NULL,1),(32,'Subsystem',NULL,1),(34,'Ancient Relics',NULL,1),(35,'Decryptors',NULL,1),(39,'Infrastructure Upgrades',NULL,1),(40,'Sovereignty Structures',NULL,1),(41,'Planetary Interaction',NULL,1),(42,'Planetary Resources',NULL,1),(43,'Planetary Commodities',NULL,1),(46,'Orbitals',NULL,1),(49,'Placeables',NULL,0),(53,'Effects',NULL,0),(54,'Lights',NULL,0),(59,'Cells',NULL,0),(63,'Special Edition Assets',NULL,1),(65,'Structure',NULL,1),(66,'Structure Module',NULL,1),(350001,'Infantry',NULL,0);
 /*!40000 ALTER TABLE `invCategories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-02 21:29:14
+-- Dump completed on 2015-07-13 19:23:07
