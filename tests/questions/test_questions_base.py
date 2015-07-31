@@ -105,11 +105,11 @@ class QuestionsBaseTestCase(unittest2.TestCase):
                 {'text': 'Derelik', 'value': 10000001L},
             ],
             'images': {
-                32: 'https://image.eveonline.com/Render/10000001_32.png',
-                64: 'https://image.eveonline.com/Render/10000001_64.png',
-                128: 'https://image.eveonline.com/Render/10000001_128.png',
-                256: 'https://image.eveonline.com/Render/10000001_256.png',
-                512: 'https://image.eveonline.com/Render/10000001_512.png',
+                32: 'https://imageserver.eveonline.com/Render/10000001_32.png',
+                64: 'https://imageserver.eveonline.com/Render/10000001_64.png',
+                128: 'https://imageserver.eveonline.com/Render/10000001_128.png',
+                256: 'https://imageserver.eveonline.com/Render/10000001_256.png',
+                512: 'https://imageserver.eveonline.com/Render/10000001_512.png',
             },
         })
 
