@@ -34,6 +34,28 @@ def execute_sql(sql, db_connection, fetch='all'):
     return results
 
 
+def get_stored_procs(db_connection):
+    """
+    :param db_connection:
+    :return:
+    """
+
+    sql = "SHOW PROCEDURE STATUS;"
+    procs = execute_sql(sql, db_connection)
+
+    return [x[1] for x in procs]
+
+def drop_proc(proc_name, db_connection):
+    """
+
+    :param proc_name:
+    :param db_connection:
+    :return:
+    """
+
+    sql = "DROP PROCEDURE {};".format(proc_name)
+    execute_sql(sql, db_connection)
+
 def update_sql_stored_procs(db_connection):
     """
 
@@ -43,11 +65,16 @@ def update_sql_stored_procs(db_connection):
     """
 
     procs_dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'procs')
+    existing_procs = get_stored_procs(db_connection)
 
     for proc_file_name in os.listdir(procs_dir_path):
         _log.info('Running {}'.format(proc_file_name))
 
         proc_file_path = os.path.join(procs_dir_path, proc_file_name)
+        proc_name = proc_file_name.split('.')[1]
+
+        if proc_name in existing_procs:
+            drop_proc(proc_name, db_connection)
 
         with open(proc_file_path, 'r') as sql_file:
             sql = " ".join(sql_file.readlines())

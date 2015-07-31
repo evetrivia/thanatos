@@ -1,5 +1,3 @@
-DROP PROCEDURE IF EXISTS get_all_published_ships_basic;
-
 CREATE PROCEDURE `get_all_published_ships_basic` ()
 DETERMINISTIC
 BEGIN

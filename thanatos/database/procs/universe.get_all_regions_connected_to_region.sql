@@ -1,5 +1,3 @@
-DROP PROCEDURE IF EXISTS get_all_regions_connected_to_region;
-
 CREATE PROCEDURE `get_all_regions_connected_to_region` (IN paramFromRegionID INTEGER)
 DETERMINISTIC
 BEGIN

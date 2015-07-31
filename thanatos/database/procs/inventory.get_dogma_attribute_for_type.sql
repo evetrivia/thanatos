@@ -1,5 +1,3 @@
-DROP PROCEDURE IF EXISTS get_dogma_attribute_for_type;
-
 CREATE PROCEDURE `get_dogma_attribute_for_type` (IN paramTypeID INTEGER, IN paramAttrID INTEGER)
 DETERMINISTIC
 BEGIN
