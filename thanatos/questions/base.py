@@ -5,7 +5,7 @@ import logging
 
 from abc import ABCMeta, abstractmethod
 
-from thanatos.ccp_image_server import get_type_links
+from eveimageserver import get_type_links
 
 _log = logging.getLogger('thanatos')
 
