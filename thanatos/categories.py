@@ -6,7 +6,6 @@ geography = {
     'description': 'Questions regarding the solar systems and regions of New Eden.',
 }
 
-# Seoncdary Cateogries
 geography_regions = {
     'name': 'Regions',
     'description': 'Questions specifically about the regions of New Eden.',
@@ -17,7 +16,7 @@ geography_miscellaneous = {
     'description': 'Miscellaneous questions about the geography of New Eden.',
 }
 
-# The Inventory category it is's sub-categories
+# The Inventory category and its sub-categories
 inventory = {
     'name': 'Inventory',
     'description': 'Questions regarding the ships, modules, and other items.',
@@ -29,6 +28,6 @@ inventory_slots = {
 }
 
 inventory_ship_id = {
-    'name': 'Ship ID',
+    'name': 'ShipID',
     'description': 'Questions asking to identify what ship is being described.',
 }
