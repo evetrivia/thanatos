@@ -18,7 +18,7 @@ class SlotsQuestion(Question):
     category = categories.inventory
     sub_category = categories.inventory_slots
 
-    random_weight = 10
+    random_weight = 20
 
     question = 'How many {} slots does the {} have?'
 
@@ -69,7 +69,7 @@ class ShipImageIdentificationQuestion(Question):
     category = categories.inventory
     sub_category = categories.inventory_ship_id
 
-    random_weight = 8
+    random_weight = 16
 
     question = 'What ship is pictured?'
 

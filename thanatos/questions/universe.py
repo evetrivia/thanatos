@@ -18,7 +18,7 @@ class BorderingRegionsQuestion(Question):
     category = categories.geography
     sub_category = categories.geography_regions
 
-    random_weight = 10
+    random_weight = 20
 
     question = 'Which of the following regions borders the {} region?'
 
