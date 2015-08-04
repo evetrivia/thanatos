@@ -22,6 +22,7 @@ class DatabaseUniverseTestCase(unittest2.TestCase):
 
         mock_execute_sql.assert_called_with('CALL get_all_regions();', mock_db_connection)
         self.assertEqual(results, [(1, 'test')])
+        self.assertEqual(universe.get_all_regions._results, [(1, 'test')])
 
     @mock.patch('thanatos.database.universe.execute_sql')
     def test_get_all_not_wh_regions(self, mock_execute_sql):
@@ -34,6 +35,7 @@ class DatabaseUniverseTestCase(unittest2.TestCase):
 
         mock_execute_sql.assert_called_with('CALL get_all_not_wh_regions();', mock_db_connection)
         self.assertEqual(results, [(1, 'test')])
+        self.assertEqual(universe.get_all_not_wh_regions._results, [(1, 'test')])
 
     @mock.patch('thanatos.database.universe.execute_sql')
     def test_get_all_regions_connected_to_region(self, mock_execute_sql):

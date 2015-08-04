@@ -13,7 +13,7 @@ class DatabaseInventoryTestCase(unittest2.TestCase):
 
     @mock.patch('thanatos.database.inventory.execute_sql')
     def test_get_all_published_ships_basic(self, mock_execute_sql):
-        """ Test we can call get all published ships basic. """
+        """ Test we can call get all published ships basic and the results are cached. """
 
         mock_db_connection = mock.MagicMock()
         mock_execute_sql.return_value = [(1, 'test')]
@@ -22,6 +22,7 @@ class DatabaseInventoryTestCase(unittest2.TestCase):
 
         mock_execute_sql.assert_called_with('CALL get_all_published_ships_basic();', mock_db_connection)
         self.assertEqual(results, [(1, 'test')])
+        self.assertEqual(inventory.get_all_published_ships_basic._results, [(1, 'test')])
 
     @mock.patch('thanatos.database.inventory.execute_sql')
     def test_get_dogma_attribute_for_type(self, mock_execute_sql):

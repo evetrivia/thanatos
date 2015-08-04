@@ -14,10 +14,12 @@ def get_all_published_ships_basic(db_connection):
     :rtype: list
     """
 
-    sql = 'CALL get_all_published_ships_basic();'
-    results = execute_sql(sql, db_connection)
+    if not hasattr(get_all_published_ships_basic, '_results'):
+        sql = 'CALL get_all_published_ships_basic();'
+        results = execute_sql(sql, db_connection)
+        get_all_published_ships_basic._results = results
 
-    return results
+    return get_all_published_ships_basic._results
 
 
 def get_dogma_attribute_for_type(db_connection, type_id, dogma_attribute):

@@ -14,10 +14,12 @@ def get_all_regions(db_connection):
     :rtype: list
     """
 
-    sql = 'CALL get_all_regions();'
-    results = execute_sql(sql, db_connection)
+    if not hasattr(get_all_regions, '_results'):
+        sql = 'CALL get_all_regions();'
+        results = execute_sql(sql, db_connection)
+        get_all_regions._results = results
 
-    return results
+    return get_all_regions._results
 
 
 def get_all_not_wh_regions(db_connection):
@@ -27,10 +29,12 @@ def get_all_not_wh_regions(db_connection):
     :rtype: list
     """
 
-    sql = 'CALL get_all_not_wh_regions();'
-    results = execute_sql(sql, db_connection)
+    if not hasattr(get_all_not_wh_regions, '_results'):
+        sql = 'CALL get_all_not_wh_regions();'
+        results = execute_sql(sql, db_connection)
+        get_all_not_wh_regions._results = results
 
-    return results
+    return get_all_not_wh_regions._results
 
 
 def get_all_regions_connected_to_region(db_connection, region_id):
