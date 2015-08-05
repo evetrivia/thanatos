@@ -83,3 +83,31 @@ class ShipImageIdentificationQuestion(Question):
         question = self.format_question(chosen_ship, possible_wrong_answers, self.question, add_images_to_question=True)
 
         return question
+
+
+class ShipImageIdentificationHardQuestion(Question):
+    """ Asks the user to select the correct ship based on an image server link but
+    the answers are all variations of the same hull. """
+
+    name = 'Ship Image Identification (Hard)'
+    description = 'Pick what ship is shown in the provided image.'
+    category = categories.inventory
+    sub_category = categories.inventory_ship_id_hard
+
+    random_weight = 8
+
+    question = 'What ship is pictured?'
+
+    def ask(self):
+        ships_with_variations = inventory.get_ships_that_have_variations(self.db_connection)
+        chosen_hull = random.choice(ships_with_variations)
+
+        possible_ships = inventory.get_type_variations(self.db_connection, chosen_hull[0])
+        chosen_ship = random.choice(possible_ships)
+
+        possible_wrong_answers = list(set(possible_ships) - set([chosen_ship]))
+        possible_wrong_answers = [(x[0], x[1]) for x in possible_wrong_answers]
+
+        question = self.format_question(chosen_ship, possible_wrong_answers, self.question, add_images_to_question=True)
+
+        return question

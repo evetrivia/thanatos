@@ -29,5 +29,10 @@ inventory_slots = {
 
 inventory_ship_id = {
     'name': 'ShipID',
-    'description': 'Questions asking to identify what ship is being described.',
+    'description': 'Questions asking to identify what ship is being shown.',
+}
+
+inventory_ship_id_hard = {
+    'name': 'ShipIDHard',
+    'description': 'Questions asking to identify the variation of the ship shown.',
 }
