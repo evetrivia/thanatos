@@ -92,7 +92,7 @@ class ShipImageIdentificationHardQuestion(Question):
     name = 'Ship Image Identification (Hard)'
     description = 'Pick what ship is shown in the provided image.'
     category = categories.inventory
-    sub_category = categories.inventory_ship_id_hard
+    sub_category = categories.inventory_ship_id
 
     random_weight = 8
 
