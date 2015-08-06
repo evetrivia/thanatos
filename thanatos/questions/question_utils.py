@@ -77,9 +77,11 @@ def get_question_from_category(category):
             if question.category['name'].lower() == category:
                 questions.extend(repeat(question, question.random_weight))
 
-                return choice(questions)
+    if len(questions) > 0:
+        return choice(questions)
 
-    raise InvalidQuestionCategoryException('The category specified is invalid.')
+    else:
+        raise InvalidQuestionCategoryException('The category specified is invalid.')
 
 
 def get_question_from_sub_category(category, sub_category):
@@ -92,9 +94,11 @@ def get_question_from_sub_category(category, sub_category):
                 if question.sub_category['name'].lower() == sub_category:
                     questions.extend(repeat(question, question.random_weight))
 
-                    return choice(questions)
+    if len(questions) > 0:
+        return choice(questions)
 
-    raise InvalidQuestionCategoryException('Either the category or sub-category specified is invalid.')
+    else:
+        raise InvalidQuestionCategoryException('Either the category or sub-category specified is invalid.')
 
 
 class InvalidQuestionCategoryException(Exception):
