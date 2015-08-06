@@ -34,7 +34,7 @@ class CapsuleerLoreQuestion(Question):
     def ask(self):
         raw_question = random.choice(lore.capsuleer_lore_questions)
 
-        correct_answer = (0, raw_question['answer'])
+        correct_answer = (-1, raw_question['answer'])
 
         possible_wrong_answers = [(x, raw_question['wrong_answers'][x]) for x in xrange(0, len(raw_question['wrong_answers']))]
 
@@ -58,7 +58,7 @@ class NPCLoreQuestion(Question):
     def ask(self):
         raw_question = random.choice(lore.npc_lore_questions)
 
-        correct_answer = (0, raw_question['answer'])
+        correct_answer = (-1, raw_question['answer'])
 
         possible_wrong_answers = [(x, raw_question['wrong_answers'][x]) for x in xrange(0, len(raw_question['wrong_answers']))]
 
