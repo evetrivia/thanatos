@@ -31,3 +31,19 @@ inventory_ship_id = {
     'name': 'ShipID',
     'description': 'Questions asking to identify what ship is being shown.',
 }
+
+# The Inventory category and its sub-categories
+lore = {
+    'name': 'Lore',
+    'description': 'Questions about the lore of New Eden.',
+}
+
+lore_npc = {
+    'name': 'NPCLore',
+    'description': 'Questions specifically about the NPC lore of New Eden.',
+}
+
+lore_capsuleer = {
+    'name': 'CapsuleerLore',
+    'description': 'Questions specifically about the capsuleer lore of New Eden.',
+}
