@@ -10,7 +10,13 @@ _log = logging.getLogger('thanatos')
 
 
 def get_random_weight(questions):
-    return min(1, len(questions) / 4)
+    weight = len(questions) / 4
+
+    if weight > 1:
+        return weight
+
+    else:
+        return 1
 
 
 class CapsuleerLoreQuestion(Question):
